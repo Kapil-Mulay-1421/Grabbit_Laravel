@@ -38,3 +38,17 @@ Route::get('/profile/addresses/create', [App\Http\Controllers\CustomerAddressCon
 Route::get('/profile/addresses/{id}/edit', [App\Http\Controllers\CustomerAddressController::class, 'edit']);
 
 Route::put('/profile/addresses/{id}', 'App\Http\Controllers\CustomerAddressController@setActive');
+
+Route::delete('/profile/addresses/{id}', 'App\Http\Controllers\CustomerAddressController@destroy');
+
+Route::post('/profile/addresses', 'App\Http\Controllers\CustomerAddressController@store');
+
+Route::post('/profile/addresses/{id}/edit', 'App\Http\Controllers\CustomerAddressController@update'); // using traditional form here, doesn't allow put, so using post.
+
+Route::post('/cart', 'App\Http\Controllers\CartItemController@add');
+
+Route::post('/product/save', 'App\Http\Controllers\ProductController@addToCartOrWishlist');
+
+Route::post('/profile/account/edit', 'App\Http\Controllers\CustomerController@update');
+
+Route::delete('/cart/{id}', [App\Http\Controllers\CartItemController::class, 'destroy']);

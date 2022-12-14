@@ -25,7 +25,7 @@ class CustomerAddressController extends Controller
     public function create()
     {
         //
-        return view('addresses.create');
+        return view('profile.addresses.create');
     }
 
     /**
@@ -84,7 +84,7 @@ class CustomerAddressController extends Controller
                 ->where('address_id', $id)
                 ->first();
 
-        return view('addresses.edit', ['preset'=>$preset]);
+        return view('profile.addresses.edit', ['preset'=>$preset]);
     }
 
     /**
@@ -130,11 +130,19 @@ class CustomerAddressController extends Controller
     {
         //
         $userId = auth()->user()->id;
-        DB::table('customer_addresses')
-                ->where('address_id', $id)
-                ->where('customer_id', $userId)
-                ->delete();
-        return redirect('/profile/addresses')->with('success', 'Address Removed');
+        $activeAddressId = DB::table('customers')
+                    ->where('customer_id', $userId)
+                    ->value('active_address');
+        if ($id != $activeAddressId) {
+            DB::table('customer_addresses')
+            ->where('address_id', $id)
+            ->where('customer_id', $userId)
+            ->delete();
+            return redirect('/profile/addresses')->with('success', 'Address Removed');
+        } else {
+            return redirect('/profile/addresses')->with('error', 'Something went wrong, could not remove address.');
+        }
+
     }
 
     public function setActive($id) {

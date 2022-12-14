@@ -15,10 +15,15 @@ class ProfileController extends Controller
         $userId = auth()->user()->id;
 
         function getWishlistItems($userId) {
-            $wishlistItems = DB::table('wishlist_items') 
-                    ->join('products', 'products.product_id', 'wishlist_items.product_id')
+            $userId = auth()->user()->id;
+            $wishlistItems = DB::table('wishlist_items')
+                    ->select('products.product_id', 'products.product_name', 's.list_price', 'wishlist_items.quantity', 'products.product_image', 's.localproduce')
+                    ->leftJoin('products', 'products.product_id', 'wishlist_items.product_id')
+                    ->leftJoin('shopwise_products as s', 's.product_id', 'wishlist_items.product_id')
+                    ->whereRaw('s.store_id = wishlist_items.store_id')
                     ->where('customer_id', $userId)
                     ->get();
+
             return $wishlistItems;
         }
 
@@ -50,6 +55,14 @@ class ProfileController extends Controller
             return $activeAddress[0]; // There is only one record, the 0th element of activeAddresses.
         }
 
+        function getCustomer($userId) {
+            $customer = DB::table('customers')
+                    ->select('first_name', 'last_name', 'email', 'phone')
+                    ->where('customer_id', $userId)
+                    ->first();
+            return $customer;
+        }
+
         switch ($tab) {
             
             case 'wishlist':
@@ -66,6 +79,9 @@ class ProfileController extends Controller
                 return view('profile.subscriptions');
             case 'wallet':
                 return view('profile.wallet');
+            case 'account':
+                $customer = getCustomer($userId);
+                return view('profile.account', ['customer' => $customer]);
             default:
                 return redirect()->route('home');
         }

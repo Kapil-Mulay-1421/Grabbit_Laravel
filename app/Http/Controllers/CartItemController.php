@@ -67,13 +67,20 @@ class CartItemController extends Controller
                         ['quantity'=>$quantity]
                     );
         }
+        return redirect('/home')->with('success', 'Added item to cart.');
     }
 
-    public function delete(Request $request) {
+    public function destroy($id) {
         $userId = auth()->user()->id;
-        DB::table('cart_items')
+        $affected = DB::table('cart_items')
                 ->where('id', $id)
                 ->where('customer_id', $userId)
                 ->delete();
+
+        if($affected == 1) {
+            return redirect('/cart')->with('success', 'Product removed.');
+        } else {
+            return redirect('/cart')->with('error', 'Something went wrong, please try again.');
+        }
     }
 }

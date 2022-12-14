@@ -40,22 +40,30 @@ class ProductController extends Controller
                 ->select(DB::raw('min(list_price) as list_price'))
                 ->where('product_name', $productName)
                 ->get();
-                
+
         $response = DB::table('shopwise_products') // response is an array containing only one item.
                 ->join('products', 'products.product_id', 'shopwise_products.product_id')
-                ->select(DB::raw('products.product_id, min(store_id) as store_id, product_name, list_price, product_image, category_id'))
+                ->select(DB::raw('products.product_id, min(store_id) as store_id, product_name, description, list_price, product_image, category_id'))
                 ->where('product_name', $productName)
-                ->where('list_price', '=', $minListPrice[0]->list_price)
+                // ->where('list_price', '=', $minListPrice[0]->list_price) // isn't working, returns 0 rows. $minListPrice[0]->list_price is correct.
                 ->groupBy('list_price')
                 ->groupBy('products.product_id')
                 ->get();
-        $product = $response[0];
+        
+        // delete the below loop once the above problem is fixed.
+        foreach($response as $item) {
+            if ($item->list_price == $minListPrice[0]->list_price) {
+                $product = $item;
+            }
+        }
+
+        // $product = $response[0];
 
         // Checking if product is in wishlist
-        $inWishlist = DB::table('wishlist')
-                ->where('id', $product->product_id)->exists(); // returns bool
+        $inWishlist = DB::table('wishlist_items')
+                ->where('product_id', '=', $product->product_id)->exists(); // returns bool
 
-        return view('product', ['product'=>$product, 'inWishlist'->$inWishlist]);
+        return view('product', ['product'=>$product, 'inWishlist'=>$inWishlist]);
     }
 
     public function localproduce() {
@@ -128,5 +136,72 @@ class ProductController extends Controller
         }
 
         return view('showcase', ['products'=>$products]);
+    }
+
+    // More functions related to other tables...
+
+    public function addToCartOrWishlist(Request $request) {
+        if (isset($_POST['addToCart'])) {
+                function addToCart(Request $request) {
+                        $productId = $request->input('productId');
+                        $storeId = $request->input('storeId');
+                        $quantity = $request->input('quantity');
+                
+                        // Checking if product actually exists.
+                        $exists = DB::table('shopwise_products')
+                                ->where('store_id', $storeId)
+                                ->where('product_id', $productId)
+                                ->exists();
+                        if ($exists) {
+                            $userId = auth()->user()->id;
+                            DB::table('cart_items')
+                                    ->updateOrInsert(
+                                        ['customer_id'=>$userId, 'store_id'=>$storeId, 'product_id'=>$productId], 
+                                        ['quantity'=>$quantity]
+                                    );
+                        }
+                    }
+
+                addToCart($request);
+                return redirect('/home')->with('success', 'Added item to cart.');
+
+
+        } else {
+                function addToWishlist(Request $request) {
+                        $productId = $request->input('productId');
+                        $storeId = $request->input('storeId');
+                        $quantity = $request->input('quantity');
+
+                        $alreadyInWishlist = DB::table('wishlist_items')
+                                ->where('product_id', $productId)
+                                ->exists();
+                        if ($alreadyInWishlist) {
+                            // user wants to delete from wishlist.
+                            DB::table('wishlist_items')
+                                    ->where('product_id', $productId)
+                                    ->delete();
+
+                            return ['status' => 'Deleted item from wishlist.'];
+                        }
+                
+                        // Checking if product actually exists.
+                        $exists = DB::table('shopwise_products')
+                                ->where('store_id', $storeId)
+                                ->where('product_id', $productId)
+                                ->exists();
+                        if ($exists) {
+                            $userId = auth()->user()->id;
+                            DB::table('wishlist_items')
+                                    ->updateOrInsert(
+                                        ['customer_id'=>$userId, 'store_id'=>$storeId, 'product_id'=>$productId], 
+                                        ['quantity'=>$quantity]
+                                    );
+                            return ['status' => 'Added item to wishlist.'];
+                        }
+                    }
+
+                $res = addToWishlist($request);
+                return redirect('/profile/wishlist')->with('success', $res['status']);
+        }
     }
 }

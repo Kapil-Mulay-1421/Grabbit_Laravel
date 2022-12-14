@@ -1,6 +1,7 @@
-@extends('profile.blade.php')
+@extends('layouts.profile')
 @section('substance')
 
+<div class="items-wrapper">
 @foreach($wishlist as $product)
     <div class="item-wrapper" style="position: relative;">
         @if($product->localproduce)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
@@ -15,7 +16,7 @@
         </div>
         <div class="item-lower">
             <form name="productForm" action="" method="post" style="display: flex; flex-direction: column; align-items: center;">
-                <input name="productQuantity" type="number" value="1" min="1" max="255">
+                <input name="productQuantity" type="number" value="{{$product->quantity}}" min="1" max="255">
                 <button type="submit" style="cursor: pointer;" onclick = addToCart(event) data-internal-id= {{$loop->index}}, data-internal-class="0">
                     Add to Cart
                 </button>
@@ -23,3 +24,6 @@
         </div>
     </div>
 @endforeach
+</div>
+
+@endsection

@@ -19,15 +19,20 @@
                 @endif
                 <p style='margin: 20px;'>{{$address->address}}, {{$address->city}}, {{$address->state}}, {{$address->country}}</p>
                 <div class="shop-now-dark" style="display: flex; justify-content: space-around; width: 100%;">
-                    <button style="padding:8px 2.4em" onclick="handleEditAddress(address['address_id']+')">Edit</button>
+                    <button style="padding:8px 2.4em" onclick="window.location.href='/profile/addresses/{{$address->address_id}}/edit'">Edit</button>
                     @if($address->address_id != $activeAddress->address_id)
-                        <button style="padding:8px 2.4em" onclick="handleDeleteAddress(address->address_id)">Delete</button>
+                        {!! Form::open(['action' => ['App\Http\Controllers\CustomerAddressController@destroy', $address->address_id], 'method' => 'put'])!!}
+                        <div class="shop-now-dark" style="display: flex; justify-content: space-around; width: 100%;">
+                            {{Form::hidden('_method', 'DELETE')}}
+                            {{Form::submit('Delete', ['style' => 'padding:8px 2.4em'])}}
+                        </div>
+                        {!! Form::close() !!}
                     @endif
                 </div>
             </div>
         @endforeach
     </div>
     <div style="display: flex; justify-content: center;">
-        <button class="light-square-button" style="margin-top: 50px" onclick="handleAddAddress()">Add an Address</button>
+        <button class="light-square-button" style="margin-top: 50px" onclick="window.location.href='/profile/addresses/create'">Add an Address</button>
     </div>
 @endsection
