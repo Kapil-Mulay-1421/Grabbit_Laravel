@@ -52,3 +52,5 @@ Route::post('/product/save', 'App\Http\Controllers\ProductController@addToCartOr
 Route::post('/profile/account/edit', 'App\Http\Controllers\CustomerController@update');
 
 Route::delete('/cart/{id}', [App\Http\Controllers\CartItemController::class, 'destroy']);
+
+Route::post('/subscribers', [App\Http\Controllers\SubscriberController::class, 'store']);

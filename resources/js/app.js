@@ -37,3 +37,36 @@ app.component('example-component', ExampleComponent);
  */
 
 app.mount('#app');
+
+
+// Sticky header: 
+
+var sticky = {
+    sticky_after: 200,
+    previousScroll: 999999999,
+    init: function() {
+      this.header = document.getElementsByTagName("header")[0];
+      this.clone = this.header.cloneNode(true);
+      this.clone.classList.add("clone");
+      this.header.insertBefore(this.clone, null);
+      this.scroll();
+      this.events();
+    },
+  
+    scroll: function() {
+      if(window.scrollY > this.sticky_after && window.scrollY < this.previousScroll) {
+        document.body.classList.add("down");
+        this.previousScroll = window.scrollY;
+      }
+      else {
+        document.body.classList.remove("down");
+        this.previousScroll = window.scrollY;
+      }
+    },
+  
+    events: function() {
+      window.addEventListener("scroll", this.scroll.bind(this));
+    }
+  };
+  
+  document.addEventListener("DOMContentLoaded", sticky.init.bind(sticky));

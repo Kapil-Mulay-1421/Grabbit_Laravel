@@ -2,6 +2,10 @@
 
 @section('content')
 
+<head>
+    @vite(['resources/js/home.js'])
+</head>
+
 <body>
     <div class="outer-container">
         <div class="content">
@@ -319,14 +323,16 @@
                     </div>
                     <div class="email-collection-wrapper">
                         <p>Enter your email here *</p>
+                        {!! Form::open(['url' => '/subscribers', 'method' => 'POST', 'id' => 'subscribe-form']) !!}
                         <div class="input-buttons" style="display: flex;">
-                            <input type="email" class="email-collection-input-box" id="email-collection-input-box">
+                            <input type="email" name = 'email' class="email-collection-input-box" id="email-collection-input-box">
                             <div class="shop-now-light" style="margin-left: 15px;">
-                                <button style="height: 100%;" onclick="subscribe()">
+                                <button style="height: 100%;" onclick="subscribe(event)">
                                     Subscribe
                                 </button>
                             </div>
                         </div>
+                        {!! Form::close() !!}
                         <p id="afterSubmit" style="display: none;">Thanks for submitting!</p>
                     </div>
                 </div>
@@ -334,5 +340,6 @@
 
         </div>
     </div>
+
 </body>
 @endsection
