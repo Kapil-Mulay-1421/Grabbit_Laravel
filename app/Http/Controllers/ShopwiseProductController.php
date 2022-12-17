@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ShopwiseProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ShopwiseProductController extends Controller
 {
@@ -81,5 +82,32 @@ class ShopwiseProductController extends Controller
     public function destroy(ShopwiseProduct $shopwiseProduct)
     {
         //
+    }
+
+    public function fetchStoresForProducts(Request $request) {
+        $userId = auth()->user()->id;
+        // Getting productIds from user cart.
+        $productIds = DB::table('cart_items')
+                ->where('customer_id', $userId)
+                ->pluck('product_id');
+        $storeInfosLists = array();
+        $storeIdsLists = array();
+        $i = 0;
+        foreach ($productIds as $productId) {
+            array_push($storeInfosLists, []);
+            array_push($storeIdsLists, []);
+            $sellers = DB::table('shopwise_products')
+                    ->leftJoin('stores', 'stores.store_id', 'shopwise_products.store_id')
+                    ->where('product_id', $productId)
+                    ->get();
+
+            foreach($sellers as $seller) {
+                array_push($storeIdsLists[$i], $seller->store_id);
+                array_push($storeInfosLists[$i], [$seller->store_name, $seller->quantity, $seller->list_price, $seller->store_id]);
+            }
+
+            $i = $i+1;
+        }
+        echo json_encode(array($storeIdsLists, $storeInfosLists));
     }
 }

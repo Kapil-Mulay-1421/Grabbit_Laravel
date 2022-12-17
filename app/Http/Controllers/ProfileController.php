@@ -17,7 +17,7 @@ class ProfileController extends Controller
         function getWishlistItems($userId) {
             $userId = auth()->user()->id;
             $wishlistItems = DB::table('wishlist_items')
-                    ->select('products.product_id', 'products.product_name', 's.list_price', 'wishlist_items.quantity', 'products.product_image', 's.localproduce')
+                    ->select('products.product_id', 'products.product_name', 's.list_price', 'wishlist_items.quantity', 'products.product_image', 's.localproduce', 'wishlist_items.store_id')
                     ->leftJoin('products', 'products.product_id', 'wishlist_items.product_id')
                     ->leftJoin('shopwise_products as s', 's.product_id', 'wishlist_items.product_id')
                     ->whereRaw('s.store_id = wishlist_items.store_id')

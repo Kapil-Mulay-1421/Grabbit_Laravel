@@ -31,6 +31,8 @@ Route::get('/products/{productName}', [App\Http\Controllers\ProductController::c
 
 Route::get('/cart', [App\Http\Controllers\CartItemController::class, 'index']);
 
+Route::get('/cart/json', [App\Http\Controllers\CartItemController::class, 'indexJson']);
+
 Route::get('/profile/{tab}', [App\Http\Controllers\ProfileController::class, 'index']);
 
 Route::get('/profile/addresses/create', [App\Http\Controllers\CustomerAddressController::class, 'create']);
@@ -51,6 +53,10 @@ Route::post('/product/save', 'App\Http\Controllers\ProductController@addToCartOr
 
 Route::post('/profile/account/edit', 'App\Http\Controllers\CustomerController@update');
 
-Route::delete('/cart/{id}', [App\Http\Controllers\CartItemController::class, 'destroy']);
+Route::get('/cart/{id}/delete', [App\Http\Controllers\CartItemController::class, 'destroy']);
 
 Route::post('/subscribers', [App\Http\Controllers\SubscriberController::class, 'store']);
+
+Route::get('/stores/sellers', [App\Http\Controllers\ShopwiseProductController::class, 'fetchStoresForProducts']); // Will be called at runtime from client side script (cart.js).
+
+Route::post('/checkout', [App\Http\Controllers\CartItemController::class, 'checkout']);

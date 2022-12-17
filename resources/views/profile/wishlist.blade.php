@@ -15,12 +15,14 @@
             </a>
         </div>
         <div class="item-lower">
-            <form name="productForm" action="" method="post" style="display: flex; flex-direction: column; align-items: center;">
-                <input name="productQuantity" type="number" value="{{$product->quantity}}" min="1" max="255">
-                <button type="submit" style="cursor: pointer;" onclick = addToCart(event) data-internal-id= {{$loop->index}}, data-internal-class="0">
-                    Add to Cart
-                </button>
-            </form>
+            {!! Form::open(['action' => ['App\Http\Controllers\CartItemController@add'], 'method' => 'post']) !!}
+                {{Form::hidden('_method', 'POST')}}  
+                {{Form::hidden('productId', $product->product_id)}}   
+                {{Form::hidden('storeId', $product->store_id)}}                  
+                {{Form::label('quantity', 'Quantity')}}
+                {{Form::number('quantity', 1)}}
+                {{Form::submit('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart'])}}
+            {!! Form::close() !!}
         </div>
     </div>
 @endforeach

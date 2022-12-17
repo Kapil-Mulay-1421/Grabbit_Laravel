@@ -501,6 +501,19 @@ header {
         transition: 0.25s;
     }
 
+    .item-lower input[type=submit] {
+        width: 85%;
+        height: 40px;
+        background-color: #154051;
+        color: white;
+        border-radius: 100px;
+        border: none;
+        margin-bottom: 10px;
+        font-size: 0.9em;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
     .item-lower button:hover {
         background-color: #4e6c78;
     }

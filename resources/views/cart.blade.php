@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
+<head>
+    @vite(['resources/js/cart.js'])
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+
 <div class="container" style="display: flex; justify-content: center;">
     <div class="cart-main-wrapper">
         <div class="my-cart-wrapper">
@@ -40,12 +45,12 @@
             <h2>Order Summary</h2>
             <hr style="width: 100%; margin-block-start: 0px;">
             <ul style="list-style-type: none; padding-inline-start: 0; width: 100%;">
-                <li><div class="subtotal" style="display: flex; justify-content: space-between;"><p>Subtotal</p><p id="subtotal">{{$subtotal}}</p></div></li>
+                <li><div class="subtotal" style="display: flex; justify-content: space-between;"><p>Subtotal</p><p id="subtotal-element">{{$subtotal}}</p></div></li>
                 <li><div class="coupon" style="justify-content: space-between; display:flex;"><p>Coupon</p><p id="coupon">{{$appliedCoupon ? '20% Off' : 'None'}}</p></div></li>
                 <li><div class="shipping" style="display: flex; justify-content: space-between;"><p>Shipping</p><p>FREE</p></div></li>
                 <li>Maharashtra, India</li>
                 <hr>
-                <li><div class="total" style="display: flex; justify-content: space-between; align-items: center;"><p style="font-size: 24px; margin-top:9.5px;">Total</p><p id="total">{{$total}}</p></div></li>
+                <li><div class="total" style="display: flex; justify-content: space-between; align-items: center;"><p style="font-size: 24px; margin-top:9.5px;">Total</p><p id="total-element">{{$total}}</p></div></li>
             </ul>
             <div class="shop-now-dark" style="display: flex; justify-content: center; width: 100%;">
                 <button style="width: 100%;" onclick="checkout()">Checkout</button>
@@ -63,7 +68,8 @@
         
     </div>
 
-    <form style="display: none" action="checkoutPage.php" method="POST" id="checkoutForm">
+    <form style="display: none" action="/checkout" method="POST" id="checkoutForm">
+        @csrf
         <input type="hidden" id="cartItemsInput" name="cartItems" value=""/>
         <input type="hidden" id="orderNoteInput" name="orderNote" value=""/>
     </form>

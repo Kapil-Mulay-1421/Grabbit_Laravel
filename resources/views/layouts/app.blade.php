@@ -26,7 +26,7 @@
 </head>
 <body>
     <div id="app">
-        <header>
+        <header style="margin-bottom: 50px;">
         <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #154051;">
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
