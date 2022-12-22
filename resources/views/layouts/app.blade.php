@@ -36,7 +36,7 @@
                             <a href="" class="nav-link">About Us</a> 
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">Customer Support</a>
+                            <a href="/customerSupport" class="nav-link">Customer Support</a>
                         </li>
                     </ul>
 
@@ -91,10 +91,10 @@
                     <a class="menu-item" href="/categories">Product Range</a>
                     <a class="menu-item" href="/localproduce">Verified Local Produce</a>
                     <a class="menu-item" href="more.html">More</a>
-                    <a href="customerSupport.php#locations">Locations</a>
+                    <a href="/customerSupport#locations">Locations</a>
                     <a href="/profile/wishlist">Wishlist</a>
                     <a href="/cart">Your Cart</a>
-                    <a href="customer-support.html">Customer Support</a>
+                    <a href="/customerSupport">Customer Support</a>
                     <a href="about.html">About Us</a>
                 </div>
             </div>
@@ -116,7 +116,7 @@
             <div class="grabbit-bar-right">
                 <div class="icon-wrapper">
                     <div class="location-icon-wrapper">
-                        <a href="customerSupport.php#locations"><img src={{asset("images/Icons/location_icon.png")}} alt=""></a>
+                        <a href="/customerSupport#locations"><img src={{asset("images/Icons/location_icon.png")}} alt=""></a>
                     </div>
                     <div class="heart-icon-wrapper">
                         <a href="/profile/wishlist"><img src={{asset("images/Icons/heart_icon.png")}} alt=""></a>
@@ -230,10 +230,10 @@
         
                 <ul>
                     <li><h2>Info</h2></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="about.html">About Us</a></li> 
-                    <li><a href="customerSupport.php">Customer Support</a></li> 
-                    <li><a href="customerSupport.php#locations">Locations</a></li> 
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/about">About Us</a></li> 
+                    <li><a href="/customerSupport">Customer Support</a></li> 
+                    <li><a href="/customerSupport#locations">Locations</a></li> 
                 </ul>
         
                 <ul>

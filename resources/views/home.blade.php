@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="shop-now-dark">
-                        <button onclick="location.href = 'categoryPage.php?categoryName=bakery'">
+                        <button onclick="location.href = '/categories/bakery'">
                             Shop Now
                         </button>
                 </div>
@@ -74,11 +74,11 @@
                         @foreach($deals as $product)
                             <div class="item-wrapper" style="position: relative;">
                                 @if($product->localproduce)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
-                                <a href="productPage.php?productName={{$product->product_name}}">
+                                <a href="/products/{{$product->product_name}}">
                                     <img src= {{$product->product_image}}  alt="">
                                 </a>
                                 <div class="item-mid">
-                                    <a href="productPage.php?productName={{$product->product_name}}">
+                                    <a href="/products/{{$product->product_name}}">
                                         <p style="margin-top: 10px;"> {{$product->product_name}} </p>
                                         <p> $ {{ $product->list_price }} </p>
                                     </a>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="shop-now-light" style="display: flex; justify-content: center; margin-top: 45px; margin-bottom: 45px;">
-                    <button onclick="window.location.href='bestDeals.php'">
+                    <button onclick="window.location.href='/deals'">
                         Shop Best Deals
                     </button>
                 </div>
@@ -113,7 +113,7 @@
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi architecto odit praesentium.</p>
                     </div>
                     <div class="shop-now-dark" style="padding-left: 10%; padding-top: 0px;">
-                        <button onclick="window.location.href='categoryPage.php?categoryName=wine'">
+                        <button onclick="window.location.href='/categories/wine'">
                             Shop Now
                         </button>
                     </div>
@@ -125,7 +125,7 @@
                         <h2>Cleaning Supplies</h2>
                     </div>
                     <div class="shop-now-dark" style="padding-left: 10%; padding-top: 0px;">
-                        <button onclick="window.location.href='categoryPage.php?categoryName=Cleaning Supplies'">
+                        <button onclick="window.location.href='/categories/Cleaning Supplies'">
                             Shop Now
                         </button>
                     </div>
@@ -136,36 +136,36 @@
                 <h1 style="margin-left: 10%;">Most Popular Categories</h1>
                 <div class="categories-grid">
                     <div class="category-wrapper">
-                        <img src="images/vegetables.png" alt="" style="width: 75%; height: auto; cursor: pointer;" onclick="window.location.href='categoryPage.php?categoryName=vegetables'">
-                        <a href="categoryPage.php?categoryName=vegetables">Vegetables</a>
+                        <img src="images/vegetables.png" alt="" style="width: 75%; height: auto; cursor: pointer;" onclick="window.location.href='/categories/vegetables'">
+                        <a href="/categories/vegetables">Vegetables</a>
                     </div>
                     <div class="category-wrapper">
-                        <img src="images/bakery.png" alt="" style="width: 75%; height: auto; cursor: pointer;" onclick="window.location.href='categoryPage.php?categoryName=bakery'" >
-                        <a href="categoryPage.php?categoryName=bakery">Bakery</a>
+                        <img src="images/bakery.png" alt="" style="width: 75%; height: auto; cursor: pointer;" onclick="window.location.href='/categories/bakery'" >
+                        <a href="/categories/bakery">Bakery</a>
                     </div>
                     <div class="category-wrapper">
-                        <img src="images/wine.png" alt="" style="width: 65%; height: auto; cursor: pointer;" onclick="window.location.href='categoryPage.php?categoryName=wine'">
-                        <a href="categoryPage.php?categoryName=wine">Wine</a>
+                        <img src="images/wine.png" alt="" style="width: 65%; height: auto; cursor: pointer;" onclick="window.location.href='/categories/wine'">
+                        <a href="/categories/wine">Wine</a>
                     </div>
                     <div class="category-wrapper">
-                        <img src="images/dairy.png" alt="" style="width: 75%; height: auto; cursor: pointer;" onclick="window.location.href='categoryPage.php?categoryName=dairy %26 eggs'">
-                        <a href="categoryPage.php?categoryName=dairy %26 eggs">Dairy & Eggs</a>
+                        <img src="images/dairy.png" alt="" style="width: 75%; height: auto; cursor: pointer;" onclick="window.location.href='/categories/dairy %26 eggs'">
+                        <a href="/categories/dairy %26 eggs">Dairy & Eggs</a>
                     </div>
                     <div class="category-wrapper">
-                        <img src="images/meat.png" alt="" style="width: 75%; height: auto; cursor: pointer;" onclick="window.location.href='categoryPage.php?categoryName=meat %26 poultry'">
-                        <a href="categoryPage.php?categoryName=meat %26 poultry">Meat & Poultry</a>
+                        <img src="images/meat.png" alt="" style="width: 75%; height: auto; cursor: pointer;" onclick="window.location.href='/categories/meat %26 poultry'">
+                        <a href="/categories/meat %26 poultry">Meat & Poultry</a>
                     </div>
                     <div class="category-wrapper">
-                        <img src="images/soft_drinks.png" alt="" style="width: 60%; height: auto; cursor: pointer;" onclick="window.location.href='categoryPage.php?categoryName=soft drinks'">
-                        <a href="categoryPage.php?categoryName=soft drinks">Soft Drinks</a>
+                        <img src="images/soft_drinks.png" alt="" style="width: 60%; height: auto; cursor: pointer;" onclick="window.location.href='/categories/soft drinks'">
+                        <a href="/categories/soft drinks">Soft Drinks</a>
                     </div>
                     <div class="category-wrapper">
-                        <img src="images/cleaning_supplies.png" alt="" style="width: 70%; height: auto; cursor: pointer;" onclick="window.location.href='categoryPage.php?categoryName=cleaning supplies'">
-                        <a href="categoryPage.php?categoryName=cleaning supplies">Cleaning Supplies</a>
+                        <img src="images/cleaning_supplies.png" alt="" style="width: 70%; height: auto; cursor: pointer;" onclick="window.location.href='/categories/cleaning supplies'">
+                        <a href="/categories/cleaning supplies">Cleaning Supplies</a>
                     </div>
                     <div class="category-wrapper">
-                        <img src="images/cereal_and_snacks.png" alt="" style="width: 70%; height: 50%; cursor: pointer;" onclick="window.location.href='categoryPage.php?categoryName=cereal %26 snacks'">
-                        <a href="categoryPage.php?categoryName=cereal %26 snacks">Cereal & Snacks</a>
+                        <img src="images/cereal_and_snacks.png" alt="" style="width: 70%; height: 50%; cursor: pointer;" onclick="window.location.href='/categories/cereal %26 snacks'">
+                        <a href="/categories/cereal %26 snacks">Cereal & Snacks</a>
                     </div>
                 </div>
             </div>
@@ -177,11 +177,11 @@
                         @foreach($startYourCartProducts as $product)
                             <div class="item-wrapper" style="position: relative;">
                                 @if($product->localproduce == 1)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
-                                <a href="productPage.php?productName={{$product->product_name}}">
+                                <a href="/products/{{$product->product_name}}">
                                     <img src= {{$product->product_image}}  alt="">
                                 </a>
                                 <div class="item-mid">
-                                    <a href="productPage.php?productName={{$product->product_name}}">
+                                    <a href="/products/{{$product->product_name}}">
                                         <p style="margin-top: 10px;"> {{$product->product_name}} </p>
                                         <p> $ {{ $product->list_price }} </p>
                                     </a>
@@ -201,7 +201,7 @@
                     </div>
                 </div>
                 <div class="shop-now-light" style="display: flex; justify-content: center; margin-top: 45px; margin-bottom: 45px;">
-                    <button onclick="window.location.href='bestDeals.php'">
+                    <button onclick="window.location.href='/deals'">
                         Shop Local Produce
                     </button>
                 </div>
@@ -226,11 +226,11 @@
                         @foreach($mostPopularProducts as $product)
                             <div class="item-wrapper" style="position: relative;">
                                 @if($product->localproduce == 1)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
-                                <a href="productPage.php?productName={{$product->product_name}}">
+                                <a href="/products/{{$product->product_name}}">
                                     <img src= {{$product->product_image}}  alt="">
                                 </a>
                                 <div class="item-mid">
-                                    <a href="productPage.php?productName={{$product->product_name}}">
+                                    <a href="/products/{{$product->product_name}}">
                                         <p style="margin-top: 10px;"> {{$product->product_name}} </p>
                                         <p> $ {{ $product->list_price }} </p>
                                     </a>
@@ -250,7 +250,7 @@
                     </div>
                 </div>
                 <div class="shop-now-light" style="display: flex; justify-content: center; margin-top: 45px; margin-bottom: 45px;">
-                    <button onclick="window.location.href='bestDeals.php'">
+                    <button onclick="window.location.href='/deals">
                         Shop Most Popular
                     </button>
                 </div>
@@ -264,7 +264,7 @@
                         <h1>Favorite <br> Pastas</h1>
                     </div>
                     <div class="shop-now-dark" style="padding-left: 10%; padding-top: 0px;">
-                        <button onclick="window.location.href='categoryPage.php?categoryName=Pastas %26 Grains'">
+                        <button onclick="window.location.href='/categories/Pastas %26 Grains'">
                             Shop Now
                         </button>
                     </div>
@@ -276,7 +276,7 @@
                         <h2>Cereal Brands</h2>
                     </div>
                     <div class="shop-now-dark" style="padding-left: 10%; padding-top: 0px;">
-                        <button onclick="window.location.href='categoryPage.php?categoryName=Cereal %26 Snacks'">
+                        <button onclick="window.location.href='/categories/Cereal %26 Snacks'">
                             Shop Now
                         </button>
                     </div>
@@ -290,11 +290,11 @@
                         @foreach($freshFindsProducts as $product)
                             <div class="item-wrapper" style="position: relative;">
                                 @if($product->localproduce == 1)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
-                                <a href="productPage.php?productName={{$product->product_name}}">
+                                <a href="/products/{{$product->product_name}}">
                                     <img src= {{$product->product_image}}  alt="">
                                 </a>
                                 <div class="item-mid">
-                                    <a href="productPage.php?productName={{$product->product_name}}">
+                                    <a href="/products/{{$product->product_name}}">
                                         <p style="margin-top: 10px;"> {{$product->product_name}} </p>
                                         <p> $ {{ $product->list_price }} </p>
                                     </a>
@@ -314,7 +314,7 @@
                     </div>
                 </div>
                 <div class="shop-now-light" style="display: flex; justify-content: center; margin-top: 45px; margin-bottom: 45px;">
-                    <button onclick="window.location.href='bestDeals.php'">
+                    <button onclick="window.location.href='/deals'">
                         Continue Shopping
                     </button>
                 </div>

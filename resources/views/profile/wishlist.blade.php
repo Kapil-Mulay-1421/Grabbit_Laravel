@@ -5,11 +5,11 @@
 @foreach($wishlist as $product)
     <div class="item-wrapper" style="position: relative;">
         @if($product->localproduce)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
-        <a href="productPage.php?productName={{$product->product_name}}">
+        <a href="/products/{{$product->product_name}}">
             <img src= {{asset($product->product_image)}}  alt="">
         </a>
         <div class="item-mid">
-            <a href="productPage.php?productName={{$product->product_name}}">
+            <a href="/products/{{$product->product_name}}">
                 <p style="margin-top: 10px;"> {{$product->product_name}} </p>
                 <p> $ {{ $product->list_price }} </p>
             </a>

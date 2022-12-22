@@ -1,0 +1,661 @@
+-- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
+--
+-- Host: localhost    Database: laravel
+-- ------------------------------------------------------
+-- Server version	8.0.27
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `active_express_lanes`
+--
+
+DROP TABLE IF EXISTS `active_express_lanes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `active_express_lanes` (
+  `customer_id` int NOT NULL,
+  `daily_start` date DEFAULT NULL,
+  `daily_end` date DEFAULT NULL,
+  `weekly_start` date DEFAULT NULL,
+  `weekly_end` date DEFAULT NULL,
+  `monthly_start` date DEFAULT NULL,
+  `monthly_end` date DEFAULT NULL,
+  PRIMARY KEY (`customer_id`),
+  CONSTRAINT `express_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `active_express_lanes`
+--
+
+LOCK TABLES `active_express_lanes` WRITE;
+/*!40000 ALTER TABLE `active_express_lanes` DISABLE KEYS */;
+INSERT INTO `active_express_lanes` VALUES (1,NULL,NULL,NULL,NULL,'2022-09-10','2022-09-23'),(2,NULL,NULL,NULL,NULL,'2022-01-01','2022-02-03');
+/*!40000 ALTER TABLE `active_express_lanes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cart_items`
+--
+
+DROP TABLE IF EXISTS `cart_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cart_items` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `store_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cartitems_ibfk_1_idx` (`customer_id`),
+  KEY `cartitems_ibfk_2_idx` (`product_id`),
+  KEY `cartitems_ibfk_3_idx` (`store_id`),
+  CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
+  CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
+  CONSTRAINT `cart_items_ibfk_3` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cart_items`
+--
+
+LOCK TABLES `cart_items` WRITE;
+/*!40000 ALTER TABLE `cart_items` DISABLE KEYS */;
+INSERT INTO `cart_items` VALUES (39,1,14,3,9),(41,1,13,4,6),(42,1,18,4,5),(43,1,11,4,11),(44,1,17,1,8),(45,1,10,3,4),(46,1,20,5,2),(47,1,19,3,7);
+/*!40000 ALTER TABLE `cart_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categories` (
+  `category_id` int NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'vegetables'),(2,'bakery'),(3,'wine'),(4,'dairy & eggs'),(5,'meat & poultry'),(6,'Soft Drinks'),(7,'Cleaning Supplies'),(8,'Cereal & Snacks'),(9,'Pastas & Grains'),(10,'Fruit'),(11,'beer'),(12,'Home & Kitchen'),(13,'Personal Care'),(14,'Tea'),(15,'Babies'),(16,'Fish & Seafood'),(17,'Coffee');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `classic_combos`
+--
+
+DROP TABLE IF EXISTS `classic_combos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `classic_combos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `classic_combo` varchar(45) DEFAULT NULL,
+  `image` varchar(45) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `classic_combos`
+--
+
+LOCK TABLES `classic_combos` WRITE;
+/*!40000 ALTER TABLE `classic_combos` DISABLE KEYS */;
+INSERT INTO `classic_combos` VALUES (1,'Health Combo','images/combos/health.png','Fruits, veggies, and all health-related products'),(2,'Party Combo','images/combos/party_combo.png','Food, drinks, and a lot of fun!'),(3,'Christmas Sleigh','images/combos/christmas.png','Presents, cakes, decoratives and more'),(4,'Diwali Blast','images/combos/diwali.png','Crackers, sweets, clothing and more');
+/*!40000 ALTER TABLE `classic_combos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `combowise_products`
+--
+
+DROP TABLE IF EXISTS `combowise_products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `combowise_products` (
+  `classic_combo` varchar(45) NOT NULL,
+  `product_id` int NOT NULL,
+  PRIMARY KEY (`classic_combo`,`product_id`),
+  KEY `product_id_idx` (`product_id`),
+  CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `combowise_products`
+--
+
+LOCK TABLES `combowise_products` WRITE;
+/*!40000 ALTER TABLE `combowise_products` DISABLE KEYS */;
+INSERT INTO `combowise_products` VALUES ('Health Combo',10),('Diwali Blast',12),('Party Combo',12),('Health Combo',13),('Christmas Sleigh',14),('Health Combo',15),('Diwali Blast',16),('Christmas Sleigh',17),('Diwali Blast',18),('Party Combo',18),('Party Combo',19),('Christmas Sleigh',20),('Health Combo',20);
+/*!40000 ALTER TABLE `combowise_products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `customer_addresses`
+--
+
+DROP TABLE IF EXISTS `customer_addresses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customer_addresses` (
+  `address_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  `country` varchar(45) DEFAULT NULL,
+  `latitude` decimal(15,10) DEFAULT NULL,
+  `longitude` decimal(15,10) DEFAULT NULL,
+  PRIMARY KEY (`address_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer_addresses`
+--
+
+LOCK TABLES `customer_addresses` WRITE;
+/*!40000 ALTER TABLE `customer_addresses` DISABLE KEYS */;
+INSERT INTO `customer_addresses` VALUES (1,1,'Building 1, IISER College, Pashan Road','Pune','Maharashtra','India',18.5442670000,73.8070260000),(2,1,'A-704 My World, Balewadi High Street','Pune','Maharashtra','India',18.5675990000,73.7763380000),(5,2,'A-703 My World, Balewadi High Street','Pune','Maharashtra','India',18.5442670000,73.8070260000),(7,1,'M-36, Ramnagar Colony, Bavdhan','pune','MAHARASHTRA','India',NULL,NULL);
+/*!40000 ALTER TABLE `customer_addresses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `customers`
+--
+
+DROP TABLE IF EXISTS `customers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `customers` (
+  `customer_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `phone` varchar(25) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `active_address` int DEFAULT NULL,
+  `latitude` decimal(15,10) DEFAULT NULL,
+  `longitude` decimal(15,10) DEFAULT NULL,
+  `subscribed` tinyint NOT NULL DEFAULT '0',
+  `sub_token_used` tinyint DEFAULT NULL,
+  PRIMARY KEY (`customer_id`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `phone_UNIQUE` (`phone`),
+  KEY `address_id_idx` (`active_address`),
+  CONSTRAINT `address_id` FOREIGN KEY (`active_address`) REFERENCES `customer_addresses` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customers`
+--
+
+LOCK TABLES `customers` WRITE;
+/*!40000 ALTER TABLE `customers` DISABLE KEYS */;
+INSERT INTO `customers` VALUES (1,'kevin','lee','125-124','fname@gmail.com',1,18.5442670000,73.8070260000,1,0),(2,'mo','lname','123-123','thejondoe@gmail.com',5,NULL,NULL,1,0);
+/*!40000 ALTER TABLE `customers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `daily_dose_items`
+--
+
+DROP TABLE IF EXISTS `daily_dose_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `daily_dose_items` (
+  `customer_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  PRIMARY KEY (`customer_id`,`product_id`),
+  KEY `product_id_idx` (`product_id`),
+  CONSTRAINT `customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `daily_dose_items`
+--
+
+LOCK TABLES `daily_dose_items` WRITE;
+/*!40000 ALTER TABLE `daily_dose_items` DISABLE KEYS */;
+INSERT INTO `daily_dose_items` VALUES (1,10),(1,12),(1,14),(1,15),(1,17),(1,19);
+/*!40000 ALTER TABLE `daily_dose_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `failed_jobs`
+--
+
+LOCK TABLES `failed_jobs` WRITE;
+/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_12_14_000001_create_personal_access_tokens_table',1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `monthly_mania_items`
+--
+
+DROP TABLE IF EXISTS `monthly_mania_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `monthly_mania_items` (
+  `customer_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  PRIMARY KEY (`customer_id`,`product_id`),
+  KEY `product_id_idx` (`product_id`),
+  CONSTRAINT `mania_customer` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `mania_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `monthly_mania_items`
+--
+
+LOCK TABLES `monthly_mania_items` WRITE;
+/*!40000 ALTER TABLE `monthly_mania_items` DISABLE KEYS */;
+INSERT INTO `monthly_mania_items` VALUES (1,11),(1,13),(1,14),(2,14),(2,17),(1,19),(1,20);
+/*!40000 ALTER TABLE `monthly_mania_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_items`
+--
+
+DROP TABLE IF EXISTS `order_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order_items` (
+  `order_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `store_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `buy_price` float NOT NULL,
+  `discount` float NOT NULL DEFAULT '0',
+  KEY `product_id` (`product_id`),
+  KEY `store_id` (`store_id`),
+  KEY `order_items_ibfk_1_idx` (`order_id`),
+  CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `order_items_ibfk_3` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_items`
+--
+
+LOCK TABLES `order_items` WRITE;
+/*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
+INSERT INTO `order_items` VALUES (1,10,2,1,4.49,0),(1,11,4,5,6.49,0),(1,10,3,1,5.49,0),(2,12,1,3,6.99,0),(1,12,1,3,6.99,0),(2,10,4,3,5.49,0),(2,13,4,3,5.49,0),(1,13,1,2,5.99,0),(1,14,1,2,5.99,0),(2,15,5,2,6.49,0),(2,16,5,2,6.49,0),(1,18,2,5,6.99,0);
+/*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int DEFAULT NULL,
+  `total_amount` float DEFAULT NULL,
+  `order_date` date NOT NULL,
+  `order_status` tinyint NOT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,1,205.49,'2022-03-16',0),(2,2,5.49,'2022-03-16',0);
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+DROP TABLE IF EXISTS `personal_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+LOCK TABLES `personal_access_tokens` WRITE;
+/*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `products` (
+  `product_id` int NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(255) NOT NULL,
+  `category_id` int NOT NULL,
+  `product_image` varchar(45) NOT NULL,
+  `description` varchar(1023) NOT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `products_ibfk_1` (`category_id`),
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (10,'Hass Avocados, Ready-to-Eat',10,'images/avocado.jpg',''),(11,'Yellow Banana Bunch',10,'images/banana.jpg',''),(12,'Strawberries',10,'images/strawberry.jpg','The garden strawberry (or simply strawberry; Fragaria × ananassa)[1] is a widely grown hybrid species of the genus Fragaria, collectively known as the strawberries, which are cultivated worldwide for their fruit. The fruit is widely appreciated for its characteristic aroma, bright red color, juicy texture, and sweetness. It is consumed in large quantities, either fresh or in such prepared foods as jam, juice, pies, ice cream, milkshakes, and chocolates. Artificial strawberry flavorings and aromas are also widely used in products such as candy, soap, lip gloss, perfume, and many others.'),(13,'Greenhouse Cucumber',1,'images/cucumber.jpg',''),(14,'Stawberries',10,'images/strawberry.jpg','The garden strawberry (or simply strawberry; Fragaria × ananassa)[1] is a widely grown hybrid species of the genus Fragaria, collectively known as the strawberries, which are cultivated worldwide for their fruit. The fruit is widely appreciated for its characteristic aroma, bright red color, juicy texture, and sweetness. It is consumed in large quantities, either fresh or in such prepared foods as jam, juice, pies, ice cream, milkshakes, and chocolates. Artificial strawberry flavorings and aromas are also widely used in products such as candy, soap, lip gloss, perfume, and many others.'),(15,'Banana',10,'images/banana.jpg',''),(16,'greenhouse cucumber',1,'images/cucumber.jpg',''),(17,'Avocados-two',10,'images/avocado.jpg',''),(18,'100% Whole Wheat Bread 24 oz.',2,'images/bread.jpg',''),(19,'Whole Milk Gallon, 64 oz.',4,'images/milk.jpg',''),(20,'Herbal Tea',14,'images/herbal_tea.jpg','');
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shopwise_products`
+--
+
+DROP TABLE IF EXISTS `shopwise_products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `shopwise_products` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `store_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `list_price` float NOT NULL,
+  `quantity` int NOT NULL,
+  `localproduce` tinyint NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shopwise_products`
+--
+
+LOCK TABLES `shopwise_products` WRITE;
+/*!40000 ALTER TABLE `shopwise_products` DISABLE KEYS */;
+INSERT INTO `shopwise_products` VALUES (1,1,10,5.99,5,1),(2,1,11,6.99,0,0),(3,1,12,4.49,12,0),(4,1,15,3.49,30,1),(5,1,17,5.99,15,0),(6,2,10,5.99,5,0),(7,2,11,6.99,0,0),(8,2,13,5.49,12,1),(9,2,16,3.49,15,0),(10,3,10,4.49,5,1),(11,3,11,6.99,0,1),(12,3,13,6.49,15,1),(13,3,14,13.49,15,0),(14,3,15,5.99,34,1),(15,3,16,5.49,15,0),(16,3,19,5.49,15,0),(17,4,10,6.99,5,0),(18,4,11,6.99,12,1),(19,4,13,4.49,15,0),(20,4,14,12.99,12,0),(21,4,15,5.49,0,1),(22,4,18,3.99,15,0),(23,5,11,3.99,7,0),(24,5,13,4.49,15,0),(25,5,14,10.99,15,0),(26,5,18,4.49,15,0),(27,5,20,6.99,15,1);
+/*!40000 ALTER TABLE `shopwise_products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `stores`
+--
+
+DROP TABLE IF EXISTS `stores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `stores` (
+  `store_id` int NOT NULL AUTO_INCREMENT,
+  `store_name` varchar(255) NOT NULL,
+  `phone` varchar(25) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `state` varchar(20) DEFAULT NULL,
+  `latitude` decimal(15,10) DEFAULT NULL,
+  `longitude` decimal(15,10) DEFAULT NULL,
+  PRIMARY KEY (`store_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stores`
+--
+
+LOCK TABLES `stores` WRITE;
+/*!40000 ALTER TABLE `stores` DISABLE KEYS */;
+INSERT INTO `stores` VALUES (1,'Dhanashree','555-444','dhanashree@gmail.com','sus road','Pune','Maharashtra',18.5435610000,73.7827550000),(2,'Ganesh Grocers','666-555','ganeshgrocers@gmail.com','sus road','Pune','Maharashtra',18.5678090000,73.7748900000),(3,'Surbhi','666-555','surbhi@gmail.com','sus road','Pune','Maharashtra',18.5570360000,73.8037230000),(4,'Mataji','666-555','Mataji@gmail.com','Baner-Pashan Link Road','Pune','Maharashtra',18.5474450000,73.7910420000),(5,'Radheshyaam Groceries','670-555','Mataji@gmail.com','Sus Road','Pune','Maharashtra',18.5436500000,73.7855520000);
+/*!40000 ALTER TABLE `stores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subscribers`
+--
+
+DROP TABLE IF EXISTS `subscribers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `subscribers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(45) NOT NULL,
+  `subscribedon` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subscribers`
+--
+
+LOCK TABLES `subscribers` WRITE;
+/*!40000 ALTER TABLE `subscribers` DISABLE KEYS */;
+INSERT INTO `subscribers` VALUES (1,'asdkm@mmail.com','2022-08-14'),(2,'sdkfj@mail.com','2022-08-14'),(3,'mailj@mail.com','2022-08-14'),(4,'test@a','2022-12-16'),(5,'test@test.com','2022-12-16'),(6,'fnam@f','2022-12-16'),(7,'fa@f','2022-12-16'),(8,'f@ads','2022-12-16'),(9,'sdkf@aaa','2022-12-16'),(10,'fname@gmail.com','2022-12-16'),(11,'jon@doe','2022-12-16'),(12,'thejondoe@gmail.com','2022-12-16'),(13,'askdfans@asdfsdoaidm','2022-12-16'),(14,'john@doe.com','2022-12-16');
+/*!40000 ALTER TABLE `subscribers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Test User','test@test.com',NULL,'$2y$10$7xUURSy0R/woxbTDU7uku.e2UycM2f/evvPj1zfdjQm1jiaLidYyu',NULL,'2022-09-18 09:49:53','2022-09-18 09:49:53'),(2,'Test User 2','test2@test.com',NULL,'$2y$10$ro2dMVnaX83zIOG6JBJ4de0LqbQ/pakEkW8QcGe/2qyOPiYmiESg.',NULL,'2022-09-18 09:57:27','2022-09-18 09:57:27'),(3,'Test User 1','test1@test.com',NULL,'$2y$10$NRvGsXa2k7pop30HRaGZn.oQrDvLJkRxquFlRW5KsqGY.eKZcYlWu',NULL,'2022-09-18 10:01:31','2022-09-18 10:01:31');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `weekly_wonder_items`
+--
+
+DROP TABLE IF EXISTS `weekly_wonder_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `weekly_wonder_items` (
+  `customer_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  PRIMARY KEY (`customer_id`,`product_id`),
+  KEY `product_id_idx` (`product_id`),
+  CONSTRAINT `weekly_customer` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `wonder` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `weekly_wonder_items`
+--
+
+LOCK TABLES `weekly_wonder_items` WRITE;
+/*!40000 ALTER TABLE `weekly_wonder_items` DISABLE KEYS */;
+INSERT INTO `weekly_wonder_items` VALUES (1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,17),(1,18),(1,19);
+/*!40000 ALTER TABLE `weekly_wonder_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wishlist_items`
+--
+
+DROP TABLE IF EXISTS `wishlist_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wishlist_items` (
+  `customer_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `store_id` int DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  PRIMARY KEY (`customer_id`,`product_id`),
+  KEY `product_id_idx` (`product_id`),
+  KEY `store_id_idx` (`store_id`),
+  CONSTRAINT `wishlist_customer` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `wishlist_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `wishlist_store` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wishlist_items`
+--
+
+LOCK TABLES `wishlist_items` WRITE;
+/*!40000 ALTER TABLE `wishlist_items` DISABLE KEYS */;
+INSERT INTO `wishlist_items` VALUES (1,12,1,1),(1,13,4,5),(1,15,1,1),(1,17,1,1),(1,19,3,8),(1,20,5,1);
+/*!40000 ALTER TABLE `wishlist_items` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-12-22  9:42:09

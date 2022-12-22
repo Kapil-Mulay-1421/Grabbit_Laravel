@@ -60,3 +60,7 @@ Route::post('/subscribers', [App\Http\Controllers\SubscriberController::class, '
 Route::get('/stores/sellers', [App\Http\Controllers\ShopwiseProductController::class, 'fetchStoresForProducts']); // Will be called at runtime from client side script (cart.js).
 
 Route::post('/checkout', [App\Http\Controllers\CartItemController::class, 'checkout']);
+
+Route::get('/customerSupport', function() {
+    return view('customerSupport');
+});
