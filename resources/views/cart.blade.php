@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<div class="container" style="display: flex; justify-content: center;">
+<div class="container" style="display: flex; justify-content: center; margin-top: 50px;">
     <div class="cart-main-wrapper">
         <div class="my-cart-wrapper">
             <h2>My Cart</h2>
@@ -47,10 +47,23 @@
             <ul style="list-style-type: none; padding-inline-start: 0; width: 100%;">
                 <li><div class="subtotal" style="display: flex; justify-content: space-between;"><p>Subtotal</p><p id="subtotal-element">{{$subtotal}}</p></div></li>
                 <li><div class="coupon" style="justify-content: space-between; display:flex;"><p>Coupon</p><p id="coupon">{{$appliedCoupon ? '20% Off' : 'None'}}</p></div></li>
-                <li><div class="shipping" style="display: flex; justify-content: space-between;"><p>Shipping</p><p>FREE</p></div></li>
-                <li>Maharashtra, India</li>
+                <li><div class="shipping" style="display: flex; justify-content: space-between;"><p>Shipping</p><p>{{$shipping}}.00</p></div></li>
+                @if($addressFound)
+                <li>Shipping Address: <br>{{$address->address}}, {{$address->city}}, {{$address->state}}, {{$address->country}}</li>
+                <button onclick="window.location.href='/profile/addresses'">Change Address</button>
+                @endif
+                @if(! $addressFound)
+                <button onclick="window.location.href='/profile/addresses'">Activate Address</button>
+                @endif
                 <hr>
                 <li><div class="total" style="display: flex; justify-content: space-between; align-items: center;"><p style="font-size: 24px; margin-top:9.5px;">Total</p><p id="total-element">{{$total}}</p></div></li>
+                <li style="display: flex; justify-content: space-around">
+                    <label for="paymentPreferenceSelection">Choose a Payment Method:</label>
+                    <select name="visiblePaymentPreference" id="visiblePaymentInputId">
+                        <option value="razorpay">Razorpay</option>
+                        <option value="stripe">Stripe</option>
+                    </select>
+                </li>
             </ul>
             <div class="shop-now-dark" style="display: flex; justify-content: center; width: 100%;">
                 <button style="width: 100%;" onclick="checkout()">Checkout</button>
@@ -61,7 +74,7 @@
                 <button style="width: 100%;" onclick="showStores()">Store Preference</button>
             </div>
 
-            <p style="font-size: 24px; margin-bottom: 0;">We Accept Crypto</p>
+            <!-- <p style="font-size: 24px; margin-bottom: 0;">We Accept Crypto</p> -->
             <p>⛊ Secure Payments</p>
             
         </div>
@@ -72,6 +85,7 @@
         @csrf
         <input type="hidden" id="cartItemsInput" name="cartItems" value=""/>
         <input type="hidden" id="orderNoteInput" name="orderNote" value=""/>
+        <input type="hidden" id="paymentPreferenceInput" name="paymentPreference" value=""/>
     </form>
 
 </div>

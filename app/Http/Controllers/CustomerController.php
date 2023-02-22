@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator;
+
 use Symfony\Component\HttpFoundation\Response;
 
 use Illuminate\Support\Facades\DB;
@@ -80,10 +82,20 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         //
+
+        $request->validate([
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'phone' => ['max:25'],
+        ]);
+
         $userId = auth()->user()->id;
         $affected = DB::table('customers')
                 ->where('customer_id', $userId)
                 ->update(['first_name' => $request->input('firstname'), 'last_name' => $request->input('lastname'), 'phone' => $request->input('phone')]);
+        DB::table('users')
+                ->where('id', $userId)
+                ->update(['name' => $request->input('firstname')]);
         if($affected == 1) {
             return redirect('/profile/account')->with('success', 'The changes were successfully made.');
         } else {

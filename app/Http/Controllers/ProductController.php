@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -30,7 +31,7 @@ class ProductController extends Controller
                 }
         }
 
-        return view('showcase', ['products'=>$deals]);
+        return view('showcase', ['products'=>$deals, 'heading' => 'Best Deals']);
     }
 
     public function show($productName) {
@@ -60,8 +61,13 @@ class ProductController extends Controller
         // $product = $response[0];
 
         // Checking if product is in wishlist
-        $inWishlist = DB::table('wishlist_items')
-                ->where('product_id', '=', $product->product_id)->exists(); // returns bool
+        if(Auth::check()) {
+                $userId = auth()->user()->id;
+                $inWishlist = DB::table('wishlist_items')
+                        ->where('product_id', '=', $product->product_id)->where('customer_id', $userId)->exists(); // returns bool
+        } else {
+                $inWishlist = false;
+        }
 
         return view('product', ['product'=>$product, 'inWishlist'=>$inWishlist]);
     }
@@ -86,7 +92,7 @@ class ProductController extends Controller
                 }
         }
 
-        return view('showcase', ['products'=>$products]);
+        return view('showcase', ['products'=>$products, 'heading' => 'Local Produce']);
     }
 
     public function freshFinds() {
@@ -110,7 +116,7 @@ class ProductController extends Controller
                 }
         }
 
-        return view('showcase', ['products'=>$products]);
+        return view('showcase', ['products'=>$productsk, $heading => 'Fresh Finds']);
     }
 
     public function mostPopular() {
@@ -135,7 +141,7 @@ class ProductController extends Controller
             array_push($products, $response[0]);
         }
 
-        return view('showcase', ['products'=>$products]);
+        return view('showcase', ['products'=>$products, 'heading' => 'Most Popular']);
     }
 
     // More functions related to other tables...
@@ -163,7 +169,7 @@ class ProductController extends Controller
                     }
 
                 addToCart($request);
-                return redirect('/home')->with('success', 'Added item to cart.');
+                return back()->with('success', 'Added item to cart.');
 
 
         } else {
@@ -201,7 +207,35 @@ class ProductController extends Controller
                     }
 
                 $res = addToWishlist($request);
-                return redirect('/profile/wishlist')->with('success', $res['status']);
+                return back()->with('success', $res['status']);
         }
+    }
+
+    public function handleSearch(Request $request) {
+        $search = $request->input('search');
+        $percentSign = '%';
+        $queryConcat = $percentSign."".$search."".$percentSign;
+        $allProducts = DB::table('shopwise_products')
+        ->join('products', 'shopwise_products.product_id', '=', 'products.product_id')
+        ->join('stores', 'shopwise_products.store_id', '=', 'stores.store_id')
+        ->join('categories', 'categories.category_id', 'products.category_id')
+        ->where('quantity', '>', 0)
+        ->where('product_name', 'like', $queryConcat)
+        ->orWhere('category_name', 'like', $queryConcat)
+        ->orderBy('products.product_id')
+        ->orderBy('shopwise_products.list_price')
+        ->get();
+
+        // Getting unique shop products with lowest price for the "Best Deals" showcase.
+        $uniqueIds = [];
+        $products = [];
+        foreach($allProducts as $product) {
+                if(! in_array($product->product_id, $uniqueIds)) {
+                        array_push($products, $product);
+                        array_push($uniqueIds, $product->product_id);
+                }
+        }
+
+        return view('showcase', ['products'=>$products, 'heading' => 'Search Results']);
     }
 }

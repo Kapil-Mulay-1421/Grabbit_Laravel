@@ -42,21 +42,25 @@ class CustomerAddressController extends Controller
 
         $this->validate($request, [
             'address' => 'required', 
-            'city' => 'required', 
-            'state' => 'required', 
-            'country' => 'required'
+            'city' => 'required|in:pune', 
+            'state' => 'required|in:maharashtra', 
+            'country' => 'required|in:india'
         ]);
 
         // Storing the address upon validation
-
-        DB::table('customer_addresses')
-                ->insert([
+        $createdAdressId = DB::table('customer_addresses')
+                ->insertGetId([
                     'customer_id'=>$userId, 
                     'address'=>$request->input('address'),
                     'city'=>$request->input('city'),
                     'state'=>$request->input('state'),
                     'country'=>$request->input('country')
                 ]);
+        // Activating the newly made address
+        DB::table('customers') 
+                    ->where('customer_id', $userId)
+                    ->update(['active_address' => $createdAdressId]);
+
         return redirect('/profile/addresses')->with('success', 'Address Saved');
     }
 

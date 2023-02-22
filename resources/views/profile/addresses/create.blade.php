@@ -17,19 +17,25 @@
                         <div class="user-data-input-field">
                             <div>
                                 <label for="">City</label><br>
-                                <input type="text" name="city" required>
+                                <select name="city" id="cityIndputId">
+                                    <option value="pune">Pune</option>
+                                </select>
                             </div>
                         </div>
                         <div  class="user-data-input-field">
                             <div>
                                 <label for="">State</label><br>
-                                <input type="text" name="state" required>
+                                <select name="state" id="cityIndputId">
+                                    <option value="maharashtra">Maharashtra</option>
+                                </select>
                             </div>
                         </div>
                         <div  class="user-data-input-field">
                             <div>
                                 <label for="">Country</label><br>
-                                <input type="text" name="country" required>
+                                <select name="country" id="cityIndputId">
+                                    <option value="india">India</option>
+                                </select>
                             </div>
                         </div>
                     </div>

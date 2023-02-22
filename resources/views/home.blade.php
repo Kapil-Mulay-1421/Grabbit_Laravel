@@ -44,7 +44,7 @@
                     </div>
                     <div class="feature-text-wrapper">
                         <h2>Local Pickup</h2>
-                        <p>Check Out <a href="locations.html">Locaitons</a></p>
+                        <p>Check Out <a href="/customerSupport#locations">Locaitons</a></p>
                     </div>
                 </div>
                 <div class="feature">
@@ -207,7 +207,7 @@
                 </div>
             </div>
 
-            <div class="app-ad-strip">
+            <div class="app-ad-strip" style="display: none;">
                 <div class="app-ad-strip-text-wrapper">
                     <h3 style="font-size: 25px; margin-block-end: 0px;">Save Time & Money</h3>
                     <h1 style="font-size: 72px; margin-block-start: 0px; margin-block-end: 0px;">Shop With Us on the Go</h1>
@@ -250,7 +250,7 @@
                     </div>
                 </div>
                 <div class="shop-now-light" style="display: flex; justify-content: center; margin-top: 45px; margin-bottom: 45px;">
-                    <button onclick="window.location.href='/deals">
+                    <button onclick="window.location.href='/deals'">
                         Shop Most Popular
                     </button>
                 </div>
@@ -325,9 +325,12 @@
                     <div class="subscription-wrapper-text">
                         <h3 style="font-size: 20px; margin-block-end: 0;">Subscribe & Save</h3>
                         <div class="subscription-deal">
-                            <h1 style="font-size: 110px; margin-block-start: 0; margin-block-end: 0;">20%</h1> <h2 style="font-size: 25px; margin-left: 10px;">off</h2>
+                            <!-- 
+                                <h1 style="font-size: 110px; margin-block-start: 0; margin-block-end: 0;">20%</h1> <h2 style="font-size: 25px; margin-left: 10px;">off</h2> 
+                            -->
+                            <h2 style="font-size: 72px; margin-block-start: 0;">Get Updates</h2>
                         </div>
-                        <h2 style="font-size: 25px; margin-block-start: 0;">Your Next Order</h2>
+                        <h2 style="font-size: 72px; margin-block-start: 0;">On Latest Discounts</h2>
                     </div>
                     <div class="email-collection-wrapper">
                         <p>Enter your email here *</p>

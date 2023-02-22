@@ -28,12 +28,11 @@ class ProfileController extends Controller
         }
 
         function getOrders($userId) {
-            $orders = DB::table('order_items')
-                    ->join('orders', 'orders.order_id', 'order_items.order_id')
-                    ->join('products', 'products.product_id', 'order_items.product_id')
-                    ->join('stores', 'stores.store_id', 'order_items.store_id')
+            $orders = DB::table('orders')
                     ->where('orders.customer_id', $userId)
-                    ->get();
+                    ->whereIn('order_status', [1, 2, 3]) // 1 = paid, 2 = dispatched, 3 = delivered.
+                    ->get()
+                    ->reverse();
             return $orders;
         }
 
@@ -51,8 +50,8 @@ class ProfileController extends Controller
                     ->value('active_address');
             $activeAddress = DB::table('customer_addresses')
                     ->where('address_id', $activeAddressId)
-                    ->get();
-            return $activeAddress[0]; // There is only one record, the 0th element of activeAddresses.
+                    ->first();
+            return $activeAddress;
         }
 
         function getCustomer($userId) {

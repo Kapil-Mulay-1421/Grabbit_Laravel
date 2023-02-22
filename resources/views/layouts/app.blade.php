@@ -26,7 +26,7 @@
 </head>
 <body>
     <div id="app">
-        <header style="margin-bottom: 50px;">
+        <header style="margin-bottom: 20px;">
         <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #154051;">
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -62,6 +62,21 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/profile/orders">
+                                        My Orders
+                                    </a>
+                                    <a class="dropdown-item" href="/profile/addresses">
+                                        My Addresses
+                                    </a>
+                                    <a class="dropdown-item" href="/profile/wallet">
+                                        My Wallet
+                                    </a>
+                                    <a class="dropdown-item" href="/profile/subscriptions">
+                                        My Subscriptions
+                                    </a>
+                                    <a class="dropdown-item" href="/profile/account">
+                                        My Account
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -84,13 +99,13 @@
                 <input type="image" src={{asset("images/Icons/hamburger_icon.png")}} onclick="toggleHamburgerMenu()" id="hamburger">
                 <div class="hamburger-menu-links" id="hamburgerMenuLinks">
                     <a href="/profile/account">My Account</a>
-                    <a class="menu-item" href="expressLane.php">Express Lane</a>
+                    <!--<a class="menu-item" href="expressLane.php">Express Lane</a>-->
                     <a href="/home">Home</a>
-                    <a class="menu-item" href="virtualStores.php">Virtual Stores</a>
+                    <!--<a class="menu-item" href="virtualStores.php">Virtual Stores</a>-->
                     <a class="menu-item" href="/deals">Deals</a>
                     <a class="menu-item" href="/categories">Product Range</a>
                     <a class="menu-item" href="/localproduce">Verified Local Produce</a>
-                    <a class="menu-item" href="more.html">More</a>
+                    <!--<a class="menu-item" href="more.html">More</a>-->
                     <a href="/customerSupport#locations">Locations</a>
                     <a href="/profile/wishlist">Wishlist</a>
                     <a href="/cart">Your Cart</a>
@@ -107,7 +122,8 @@
 
             <div class="grabbit-bar-mid">
                 <div class="search-bar-wrapper" style="width:100%;">
-                    <form action="searchResults.php?" name="searchForm" onsubmit="searchAction()" style="width:100%;">
+                    <form action="/search" name="searchForm" style="width:100%;" method="POST">
+                        @csrf
                         <input type="text" name="search" class="main-search-bar" placeholder="Surf products" autocomplete="off">
                     </form>
                 </div>
@@ -131,7 +147,7 @@
             <div class="nav-bar">
             <div class="menu-wrapper">
                 <a href="/home">Home</a>
-                <div class="dropdown-wrapper">
+                <!--<div class="dropdown-wrapper">
                     <a class="menu-item" href="">Express Lane</a>
                     <div class="dropdown-content">
                         <a href="expressLanePage.php?request=daily_dose">Daily Dose</a>
@@ -144,7 +160,7 @@
                     <div class="dropdown-content">
                         <a href="">Monginis</a>
                     </div>
-                </div>
+                </div> -->
                 <div class="dropdown-wrapper">
                     <a class="menu-item" href="/deals">Deals</a>
                     <div class="dropdown-content">
@@ -169,12 +185,12 @@
                     <div class="dropdown-content">
                     </div>
                 </div>
-                <div class="dropdown-wrapper">
+                <!--<div class="dropdown-wrapper">
                     <a class="menu-item" href="">More</a>
                     <div class="dropdown-content">
                         <a href="classicCombos.php">Classic Combos</a>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
         </header>
@@ -245,9 +261,9 @@
     
             <div class="footer-strip-bottom">
                 <div class="policy-display-wrapper">
-                    <a href="">Shipping & Returns</a>
-                    <a href="">Terms & Conditions</a>
-                    <a href="">Payment Methods</a>
+                    <a href="/cancellation-refund-policy">Shipping & Returns</a>
+                    <a href="/terms-and-conditions">Terms & Conditions</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
                 </div>
     
                 <h2 style="margin-block-start: 0; margin-block-end: 1.2em;">We Accept the Following Payment Methods</h2>

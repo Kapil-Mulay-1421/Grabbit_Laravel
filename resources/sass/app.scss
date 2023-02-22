@@ -1036,6 +1036,12 @@ header {
         font-size: 14px;
     }
 
+    .user-data-input-field select {
+        width: 90%;
+        height: 35px;
+        margin-top: 15px;
+    }
+
     .light-square-button {
         background-color: #B6F3E8;
         color: #323232;
@@ -1328,6 +1334,10 @@ header {
 
       .item-wrapper:hover .top-right-cross {
         opacity: 1;
+      }
+
+      .privacy-div a{
+        color:rgb(67, 67, 67);
       }
       
 }

@@ -4,8 +4,8 @@
 
 <div class="container">
         
-    <div class="heading" id="heading" style="display: flex;justify-content: center;">
-        <h1></h1>
+    <div class="heading" id="heading" style="display: flex;justify-content: center; margin-top: 50px; margin-bottom: 15px; ">
+        <h1>{{$heading}}</h1>
     </div>
 
     <div class="content" style="display: flex;justify-content: center;margin-bottom: 50px;">

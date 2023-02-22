@@ -86,7 +86,7 @@ function showCartItems() {
         cartItemsWrapper.innerHTML += output;
     });
     cartItemsWrapper.innerHTML += '<ul style="list-style-type: none; padding-inline-start: 0px; line-height: 2.5em;">' +
-                                    '<li style="cursor: pointer; user-select: none;">Enter a Promo Code</li>' +
+                                    '<li style="cursor: pointer; display: none; user-select: none;">Enter a Promo Code</li>' +
                                     '<li style="cursor: pointer; user-select: none;">' +
                                     '<p style="margin: 0; width: max-content; height: max-content;" onclick="showNote()">Add a Note</p>'+
                                     '<input type="text" id="note" placeholder="Take a note">'
@@ -260,13 +260,16 @@ window.checkout = function() {
 
         // variable initialization:
         let note = '';
+        let paymentPreference = '';
 
         // setting the variables:
         note = document.getElementById('note').value;
+        paymentPreference = document.getElementById('visiblePaymentInputId').value;
 
         // setting form data (because apparently it isn't possible to send post data through window.location.href):
         document.getElementById('cartItemsInput').value = JSON.stringify(cartItems);
         document.getElementById('orderNoteInput').value = note;
+        document.getElementById('paymentPreferenceInput').value = paymentPreference;
         document.getElementById('checkoutForm').submit();
 
     }

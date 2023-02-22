@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistItemController extends Controller
 {
@@ -47,6 +48,6 @@ class WishlistItemController extends Controller
                         ['quantity'=>$quantity]
                     );
         }
-        return redirect('/profile/wishlist')->with('success', 'Added item to wishlist.');
+        return back()->with('success', 'Added item to wishlist.');
     }
 }

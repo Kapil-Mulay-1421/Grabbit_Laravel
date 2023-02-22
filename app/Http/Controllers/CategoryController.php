@@ -10,6 +10,17 @@ class CategoryController extends Controller
     //
 
     public function show($category) {
+
+        // Checking if category is valid
+        $categoryExists = DB::table('categories')
+                ->where('category_name', $category)
+                ->exists();
+
+        if (! $categoryExists) {
+            // Case of URL Manipulation
+            return redirect('/home')->with('error', 'Could not find the requested category. Please try one of the categoies listed in our product range.');
+        }
+
         // After getting a category id from the url, we display the products from the category
         $allProducts = DB::table('shopwise_products')
         ->join('products', 'shopwise_products.product_id', '=', 'products.product_id')
@@ -31,6 +42,6 @@ class CategoryController extends Controller
             }
         }
 
-        return view('showcase', ['products' => $products]);
+        return view('showcase', ['products' => $products, 'heading' => $category]);
     }
 }

@@ -65,7 +65,7 @@ CREATE TABLE `cart_items` (
   CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`),
   CONSTRAINT `cart_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
   CONSTRAINT `cart_items_ibfk_3` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `cart_items` (
 
 LOCK TABLES `cart_items` WRITE;
 /*!40000 ALTER TABLE `cart_items` DISABLE KEYS */;
-INSERT INTO `cart_items` VALUES (39,1,14,3,9),(41,1,13,4,6),(42,1,18,4,5),(43,1,11,4,11),(44,1,17,1,8),(45,1,10,3,4),(46,1,20,5,2),(47,1,19,3,7);
+INSERT INTO `cart_items` VALUES (63,1,20,5,2),(64,1,19,3,7),(65,1,12,1,1),(66,1,18,4,3);
 /*!40000 ALTER TABLE `cart_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +180,7 @@ CREATE TABLE `customer_addresses` (
 
 LOCK TABLES `customer_addresses` WRITE;
 /*!40000 ALTER TABLE `customer_addresses` DISABLE KEYS */;
-INSERT INTO `customer_addresses` VALUES (1,1,'Building 1, IISER College, Pashan Road','Pune','Maharashtra','India',18.5442670000,73.8070260000),(2,1,'A-704 My World, Balewadi High Street','Pune','Maharashtra','India',18.5675990000,73.7763380000),(5,2,'A-703 My World, Balewadi High Street','Pune','Maharashtra','India',18.5442670000,73.8070260000),(7,1,'M-36, Ramnagar Colony, Bavdhan','pune','MAHARASHTRA','India',NULL,NULL);
+INSERT INTO `customer_addresses` VALUES (1,1,'Building 1, IISER College, Pashan Road','Pune','Maharashtra','India',18.5442670000,73.8070260000),(2,1,'A-703 My World, Balewadi High Street','Pune','Maharashtra','India',18.5675990000,73.7763380000),(5,2,'A-703 My World, Balewadi High Street','Pune','Maharashtra','India',18.5442670000,73.8070260000),(7,1,'M-36, Ramnagar Colony, Bavdhan','pune','MAHARASHTRA','India',NULL,NULL);
 /*!40000 ALTER TABLE `customer_addresses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +216,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'kevin','lee','125-124','fname@gmail.com',1,18.5442670000,73.8070260000,1,0),(2,'mo','lname','123-123','thejondoe@gmail.com',5,NULL,NULL,1,0);
+INSERT INTO `customers` VALUES (1,'kevin','lee','125-124','fname@gmail.com',2,18.5442670000,73.8070260000,1,0),(2,'mo','lname','123-123','thejondoe@gmail.com',5,18.5442670000,73.8070260000,1,0);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -521,7 +521,14 @@ CREATE TABLE `stores` (
   `state` varchar(20) DEFAULT NULL,
   `latitude` decimal(15,10) DEFAULT NULL,
   `longitude` decimal(15,10) DEFAULT NULL,
-  PRIMARY KEY (`store_id`)
+  `owner_customer_id` int NOT NULL,
+  `image` varchar(105) DEFAULT NULL,
+  `opens_at` varchar(45) NOT NULL,
+  `closes_at` varchar(45) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  PRIMARY KEY (`store_id`),
+  KEY `owner_customer_id_idx` (`owner_customer_id`),
+  CONSTRAINT `owner` FOREIGN KEY (`owner_customer_id`) REFERENCES `customers` (`customer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -531,7 +538,7 @@ CREATE TABLE `stores` (
 
 LOCK TABLES `stores` WRITE;
 /*!40000 ALTER TABLE `stores` DISABLE KEYS */;
-INSERT INTO `stores` VALUES (1,'Dhanashree','555-444','dhanashree@gmail.com','sus road','Pune','Maharashtra',18.5435610000,73.7827550000),(2,'Ganesh Grocers','666-555','ganeshgrocers@gmail.com','sus road','Pune','Maharashtra',18.5678090000,73.7748900000),(3,'Surbhi','666-555','surbhi@gmail.com','sus road','Pune','Maharashtra',18.5570360000,73.8037230000),(4,'Mataji','666-555','Mataji@gmail.com','Baner-Pashan Link Road','Pune','Maharashtra',18.5474450000,73.7910420000),(5,'Radheshyaam Groceries','670-555','Mataji@gmail.com','Sus Road','Pune','Maharashtra',18.5436500000,73.7855520000);
+INSERT INTO `stores` VALUES (1,'Dhanashree Groceries','555-444','dhanashree@gmail.com','sus road','Pune','Maharashtra',18.5435610000,73.7827550000,2,'images/dhanashree.jpg','6:30 AM','10:00 PM',''),(2,'Ganesh Grocers','666-555','ganeshgrocers@gmail.com','sus road','Pune','Maharashtra',18.5678090000,73.7748900000,2,'images/ganeshgrocers.jpg','7:00 AM','9:00 PM',''),(3,'Surbhi','666-555','surbhi@gmail.com','sus road','Pune','Maharashtra',18.5570360000,73.8037230000,2,'images/surbhi.jpg','6:00 AM','11:00 PM',''),(4,'Mataji','666-555','Mataji@gmail.com','Baner-Pashan Link Road','Pune','Maharashtra',18.5474450000,73.7910420000,2,'images/mataji.jpg','6:15 AM','9:30 PM',''),(5,'Radheshyaam Groceries','670-555','Mataji@gmail.com','Sus Road','Pune','Maharashtra',18.5436500000,73.7855520000,2,'images/radheshyamgrocers.webp','8:00 AM','9:45 PM','');
 /*!40000 ALTER TABLE `stores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -658,4 +665,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-22  9:42:09
+-- Dump completed on 2023-02-13 13:06:23
