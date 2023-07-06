@@ -80,7 +80,7 @@
                                 <div class="item-mid">
                                     <a href="/products/{{$product->product_name}}">
                                         <p style="margin-top: 10px;"> {{$product->product_name}} </p>
-                                        <p> $ {{ $product->list_price }} </p>
+                                        <p> ₹ {{ $product->list_price }} </p>
                                     </a>
                                 </div>
                                 <div class="item-lower">
@@ -183,7 +183,7 @@
                                 <div class="item-mid">
                                     <a href="/products/{{$product->product_name}}">
                                         <p style="margin-top: 10px;"> {{$product->product_name}} </p>
-                                        <p> $ {{ $product->list_price }} </p>
+                                        <p> ₹ {{ $product->list_price }} </p>
                                     </a>
                                 </div>
                                 <div class="item-lower">
@@ -232,7 +232,7 @@
                                 <div class="item-mid">
                                     <a href="/products/{{$product->product_name}}">
                                         <p style="margin-top: 10px;"> {{$product->product_name}} </p>
-                                        <p> $ {{ $product->list_price }} </p>
+                                        <p> ₹ {{ $product->list_price }} </p>
                                     </a>
                                 </div>
                                 <div class="item-lower">
@@ -296,7 +296,7 @@
                                 <div class="item-mid">
                                     <a href="/products/{{$product->product_name}}">
                                         <p style="margin-top: 10px;"> {{$product->product_name}} </p>
-                                        <p> $ {{ $product->list_price }} </p>
+                                        <p> ₹ {{ $product->list_price }} </p>
                                     </a>
                                 </div>
                                 <div class="item-lower">

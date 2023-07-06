@@ -72,6 +72,14 @@ class ProductController extends Controller
         return view('product', ['product'=>$product, 'inWishlist'=>$inWishlist]);
     }
 
+    public function showJson($id) {
+        $product = DB::table('products')
+                        ->where('product_id', $id)
+                        ->first();
+
+        return json_encode($product);
+    }
+
     public function localproduce() {
         $allLocalProducts = DB::table('shopwise_products')
         ->join('products', 'shopwise_products.product_id', '=', 'products.product_id')

@@ -60,7 +60,7 @@
                 <li style="display: flex; justify-content: space-around">
                     <label for="paymentPreferenceSelection">Choose a Payment Method:</label>
                     <select name="visiblePaymentPreference" id="visiblePaymentInputId">
-                        <option value="razorpay">Razorpay</option>
+                        <!--<option value="razorpay">Razorpay</option>-->
                         <option value="stripe">Stripe</option>
                     </select>
                 </li>

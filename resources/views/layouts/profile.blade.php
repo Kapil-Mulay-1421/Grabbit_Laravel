@@ -6,7 +6,7 @@
         <div class="vertical-strip" style="width: 67%; margin-top: 0;">
             <div class="user-box">
                 <div class="photo-email-wrapper">
-                    <div class="circle"><p style="height: 100%; display: flex; justify-content: center; align-items: center; margin-block-start: 0; margin-block-end: 0; color: gray; font-size: 40px;">{{ Auth::user()->name[0] }}</p></div>
+                    <div class="circle"><p style="height: 100%; display: flex; justify-content: center; align-items: center; margin-block-start: 0; margin-block-end: 0; color: gray; font-size: 40px;">{{ Auth::user()->email[0] }}</p></div>
                     <h2 style="margin-block-end:40px; font-weight: 100;">{{ Auth::user()->email }}</h2>
                 </div>
             </div>

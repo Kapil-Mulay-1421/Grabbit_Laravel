@@ -2,13 +2,13 @@
 
 @section('content')
 
-<div class="container">
+<div class="container" style="margin-bottom: 50px;">
         
-    <div class="heading" id="heading" style="display: flex;justify-content: center; margin-top: 50px; margin-bottom: 15px; ">
+    <div class="heading" id="heading" style="display: flex;justify-content: center; margin-top: 50px; margin-bottom: 15px;  ">
         <h1>{{$heading}}</h1>
     </div>
 
-    <div class="content" style="display: flex;justify-content: center;margin-bottom: 50px;">
+    <div class="content" style="display: flex;justify-content: center;">
         <div class="filterby">
 
         </div>
@@ -22,22 +22,24 @@
                     <div class="item-mid">
                         <a href="/products/{{$product->product_name}}">
                             <p style="margin-top: 10px;"> {{$product->product_name}} </p>
-                            <p> ₹ {{ $product->list_price }} </p>
+                            <p> $ {{ $product->list_price }} </p>
                         </a>
                     </div>
                     <div class="item-lower">
-                        {!! Form::open(['action' => ['App\Http\Controllers\CartItemController@add'], 'method' => 'post']) !!}
-                            {{Form::hidden('_method', 'POST')}}  
-                            {{Form::hidden('productId', $product->product_id)}}   
-                            {{Form::hidden('storeId', $product->store_id)}}                  
-                            {{Form::label('quantity', 'Quantity')}}
-                            {{Form::number('quantity', 1)}}
-                            {{Form::submit('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart'])}}
+                        <button onclick="window.location.href='/my-stores/{{$storeId}}/products/{{$product->product_id}}/edit'" style="margin-top: 20px;">Edit</button>
+                        {!! Form::open(['action' => ['App\Http\Controllers\SellerProductController@destroy', $storeId, $product->product_id], 'method' => 'DELETE']) !!}
+                            {{Form::hidden('_method', 'DELETE')}}  
+                            {{Form::submit('Remove', ['style' => 'padding:8px 2.4em', 'name' => 'delete'])}}
                         {!! Form::close() !!}
                     </div>
                 </div>
             @endforeach
         </div> 
+
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+        <button class="light-square-button" style="margin-top: 50px" onclick="window.location.href='/my-stores/{{$storeId}}/products/create'">Add a Product</button>
     </div>
 
 </div>

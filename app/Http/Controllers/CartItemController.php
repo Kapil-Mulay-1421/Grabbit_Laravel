@@ -268,6 +268,18 @@ class CartItemController extends Controller
 
             switch($paymentPreference) {
                 case 'razorpay': 
+
+                    // Razorpay is currently unavailable as they need specific payment details in place.
+                    // Use the below code once we have the access to the API keys.
+
+                    /*
+                    $address = getActiveAddress($userId);
+                    if ($address == null) {
+                        return redirect('/profile/addresses')->with('error', 'Please activate an address before checkout.');
+                    }
+
+                    session(['address' => $address]);
+
                     $keyId = "rzp_test_s5yDUHGWsYmtrg";
                     $secret = env("RAZORPAY_SECRET_TEST_KEY");
                     $api = new Api($keyId, $secret);
@@ -279,6 +291,9 @@ class CartItemController extends Controller
 
                     return view('checkout', ['total' => ceil($total*100), 'razorpay_order_id' => $razorpayOrder->id]);
                     break;
+                    */
+                    return redirect('/cart')->with('error', 'Please choose a valid payment method.');
+
                 case 'stripe': 
                     // adding cart items to session: 
                     session(['cartItems' => $cartItems]);

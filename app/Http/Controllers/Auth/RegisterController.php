@@ -66,14 +66,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $idInserted = DB::table('customers')
-                ->insertGetId(['first_name' => $data['name'], 'last_name' => $data['last_name'], 'email' => $data['email'], 'subscribed' => 0]);
-
-        return User::create([
-            'id' => $idInserted, 
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $idInserted = DB::table('customers')
+                ->insert(['customer_id' => $user->id, 'first_name' => $data['name'], 'last_name' => $data['last_name'], 'email' => $data['email'], 'subscribed' => 0]);
+
+        return $user;
     }
 }

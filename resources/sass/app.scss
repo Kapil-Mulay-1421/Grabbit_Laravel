@@ -1339,5 +1339,72 @@ header {
       .privacy-div a{
         color:rgb(67, 67, 67);
       }
+
+      // Seller Styles
+
+      div.store-container {
+        margin: 5px;
+        border: 1px solid #ccc;
+        float: left;
+        width: 100%;
+       }
+       .stores-grid{
+         display:grid;
+         grid-template-columns: 1fr 1fr 1fr;
+         column-gap: 20px;
+         row-gap: 40px;
+         width: 90%;
+       }
+       .store-container img{
+         width: 100%;
+         height: 275px;
+       }
+       .main-stores-container{
+         display:flex;
+         flex-direction: column;
+         align-items: center;
+         margin-block: 50px;
+       }
+       .store-name{
+         text-align: center;
+         font-size: 24px;
+       }
+
+       // For single store view
+
+       .store-page-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        }
+
+        .vertical-strip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+            width: 50%;
+        }
+
+        .main-store-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 40px;
+            margin-bottom: 50px;
+        }    
+
+        .main-store-container h3 {
+            font-size: 18px;
+        }
       
+        .store-image-container i{
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .store-image-container:hover i{
+            opacity: 1;
+            cursor: pointer;
+        }
+
 }

@@ -69,18 +69,7 @@ class OrderController extends Controller
             $status = 1;
             $shipping = 33;
 
-            // May want to get active Address from session here, defining it in CartItemController first.
-            function getActiveAddress($userId) {
-                $activeAddressId = DB::table('customers')
-                        ->where('customer_id', $userId)
-                        ->value('active_address');
-                $activeAddress = DB::table('customer_addresses')
-                        ->where('address_id', $activeAddressId)
-                        ->get();
-                return $activeAddress[0]; // There is only one record, the 0th element of activeAddresses.
-            }
-
-            $address = getActiveAddress($userId);
+            $address = session('address');
             $activeAddress = $address->address. ", ".$address->city. ", ".$address->state.", ".$address->country;
 
             $orderAlreadyAdded = DB::table('orders')
