@@ -2,12 +2,12 @@
 # Getting Started
 * Clone this repository on your device.
 * In the main folder, run: 
-```console
-    php artisan serve
-```
-```console
-    npm run dev
-```
-```console
-    stripe listen --forward-to localhost:8000/webhook
-```
+ ```sh
+   php artisan serve
+   ```
+    ```sh
+   npm run dev
+   ```
+    ```sh
+   stripe listen --forward-to localhost:8000/webhook
+   ```
