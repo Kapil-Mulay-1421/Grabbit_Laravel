@@ -20,12 +20,17 @@
                 {{Form::hidden('productId', $product->product_id)}}   
                 {{Form::hidden('storeId', $product->store_id)}}                  
                 {{Form::label('quantity', 'Quantity')}}
-                {{Form::number('quantity', 1)}}
-                {{Form::submit('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart'])}}
+                {{Form::number('quantity', 1, ['min' => 1, 'step' => 1])}}
+                {{Form::button('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart', 'onclick' => 'window.addToCart(event)'])}}
             {!! Form::close() !!}
         </div>
     </div>
 @endforeach
 </div>
+{!! Form::open(['action' => ['App\Http\Controllers\CartItemController@addAllFromWishlist'], 'method' => 'post']) !!}
+    <div style="display: flex; justify-content: center;">
+        {{Form::submit('Add All to Cart', ['class' => "light-square-button",  'style' => "margin-top: 50px"])}}
+    </div>
+{!! Form::close() !!}
 
 @endsection

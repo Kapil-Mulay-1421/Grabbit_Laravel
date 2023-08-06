@@ -73,6 +73,8 @@ Route::post('/cart', 'App\Http\Controllers\CartItemController@add')->middleware(
 
 Route::post('/product/save', 'App\Http\Controllers\ProductController@addToCartOrWishlist')->middleware('verified');
 
+Route::post('/cart/add-all-from-wishlist', 'App\Http\Controllers\CartItemController@addAllFromWishlist')->middleware('verified');
+
 Route::post('/profile/account/edit', 'App\Http\Controllers\CustomerController@update')->middleware('verified');
 
 Route::get('/cart/{id}/delete', [App\Http\Controllers\CartItemController::class, 'destroy'])->middleware('verified');

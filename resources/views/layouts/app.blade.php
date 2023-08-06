@@ -127,7 +127,7 @@
                 <div class="search-bar-wrapper" style="width:100%;">
                     <form action="/search" name="searchForm" style="width:100%;" method="POST">
                         @csrf
-                        <input type="text" name="search" class="main-search-bar" placeholder="Surf products" autocomplete="off">
+                        <input type="text" name="search" class="main-search-bar" placeholder="Surf products" autocomplete="off" value="{{$search ?? null}}">
                     </form>
                 </div>
             </div>
@@ -194,9 +194,30 @@
                         <a href="classicCombos.php">Classic Combos</a>
                     </div>
                 </div>-->
+                <div class="dropdown-wrapper">
+                    <a class="menu-item" href="/my-stores">My Stores</a>
+                    <div class="dropdown-content">
+                    </div>
+                </div>
             </div>
         </div>
         </header>
+
+        <div id="shadowLayer" onclick="triggerCart()" class></div>
+        <div class="slide-cart" id="slidingCart">
+            <div class="head" style="display: flex; justify-content: space-around; align-items: center; height: 100px; background-color: #2B80A1; color: white;">
+                <h2>Cart</h2>
+                <p onclick="triggerCart()" style="cursor: pointer; font-size: 28px; font-weight: 100;">⛌</p>
+            </div>
+            <div class="cart-items-wrapper" id="cartItemsWrapper" style="padding: 20px; height: 450px; overflow-y: scroll;">
+                <!--Render here through JS-->
+            </div>
+            <div class="shop-now-light" style="display: flex; justify-content: center; padding-bottom: 40px; padding-top: 40px; border-top: 3px solid #2B80A1;">
+                <button onclick="window.location.href='/cart'">
+                    Go to Cart
+                </button>
+            </div>
+        </div>
 
         <main>
             @include('inc.messages')
@@ -211,13 +232,12 @@
                     <li><h1>Grabbit</h1></li>
                     <li><h2>Need Help?</h2></li>
                     <li><p>​Visit our Customer Support <br> for assistance or call us at</p></li>
-                    <li><h2>123-456-7890</h2></li>
+                    <li><h2>+91 86240 37649</h2></li>
                     <li>
                         <div class="social-bar">
-                            <a href=""><img src={{asset("images/Icons/facebook_icon.png")}} alt=""></a>
-                            <a href=""><img src={{asset("images/Icons/instagram_icon.png")}} alt=""></a>
-                            <a href=""><img src={{asset("images/Icons/twitter_icon.png")}} alt=""></a>
-                            <a href=""><img src={{asset("images/Icons/youtube_icon.png")}} alt=""></a>
+                            <a href="https://www.facebook.com/profile.php?id=100084852880139"><img src={{asset("images/Icons/facebook_icon.png")}} alt=""></a>
+                            <a href="https://www.instagram.com/grabbitindia/"><img src={{asset("images/Icons/instagram_icon.png")}} alt=""></a>
+                            <a href="https://twitter.com/grabbit_india?t=HxHtcizpp4ISkUkWGuTKVQ&s=09"><img src={{asset("images/Icons/twitter_icon.png")}} alt=""></a>
                         </div>
                     </li>
                 </ul>
@@ -225,12 +245,15 @@
                 <ul class="footer-menu">
                     <li><h2>Menu</h2></li>
                     <li><a href="/home">Home</a></li>
+                    <!--
                     <li><a href="">Express Lane</a></li>
                     <li><a href="">Virtual Stores</a></li>
+                    -->
                     <li><a href="/deals">Deals</a></li>
                     <li><a href="/localproduce">Verified Local Produce</a></li>
+                    <!--
                     <li><a href="classicCombos.php">Classic Combos</a></li>
-                    <li><a href="/categories/=Home & Kitchen">Home & Kitchen</a></li>
+                    -->
                     <li><a href="/categories/Cleaning Supplies">Cleaning Supplies</a></li>
                     <li><a href="/profile/orders">My Orders</a></li>
                 </ul>
@@ -271,15 +294,11 @@
     
                 <h2 style="margin-block-start: 0; margin-block-end: 1.2em;">We Accept the Following Payment Methods</h2>
     
-                <div class="payment-methods-images-wrapper">
-                    <img src={{asset("images/american-express-payment.jpg")}} alt="">
-                    <img src={{asset("Images/paypal.jpg")}} alt="">
+                <div class="payment-methods-images-wrapper" style="display: flex; justify-content: space-between">
                     <img src={{asset("Images/visa-payment.png")}} alt="">
                     <img src={{asset("images/mastercard-icon.jpg")}} alt="">
-                    <img src={{asset("images/american-express-payment.jpg")}} alt="">
-                    <img src={{asset("Images/visa-payment.png")}} alt="">
-                    <img src={{asset("Images/paypal.jpg")}} alt="">
-                    <img src={{asset("images/mastercard-icon.jpg")}} alt="">
+                    <img src={{asset("Images/google-pay.jpg")}} alt="">
+                    <img src={{asset("images/apple-pay.png")}} alt="">
                 </div>
             </div>
         </div>

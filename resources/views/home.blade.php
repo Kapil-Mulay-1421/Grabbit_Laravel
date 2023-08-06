@@ -44,7 +44,7 @@
                     </div>
                     <div class="feature-text-wrapper">
                         <h2>Local Pickup</h2>
-                        <p>Check Out <a href="/customerSupport#locations">Locaitons</a></p>
+                        <p>Check Out <a href="/customerSupport#locations">Locations</a></p>
                     </div>
                 </div>
                 <div class="feature">
@@ -61,8 +61,8 @@
                         <img src="images/Icons/crypto_icon.png" alt="">
                     </div>
                     <div class="feature-text-wrapper">
-                        <h2>Crypto</h2>
-                        <p>Towards Digital India</p>
+                        <h2>Local Produce</h2>
+                        <p>Verified by us</p>
                     </div>
                 </div>
             </div>
@@ -89,8 +89,8 @@
                                         {{Form::hidden('productId', $product->product_id)}}   
                                         {{Form::hidden('storeId', $product->store_id)}}                  
                                         {{Form::label('quantity', 'Quantity')}}
-                                        {{Form::number('quantity', 1)}}
-                                        {{Form::submit('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart'])}}
+                                        {{Form::number('quantity', 1, ['min' => 1, 'step' => 1])}}
+                                        {{Form::button('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart', 'onclick' => 'window.addToCart(event)'])}}
                                     {!! Form::close() !!}
                                 </div>
                             </div>
@@ -192,8 +192,8 @@
                                         {{Form::hidden('productId', $product->product_id)}}   
                                         {{Form::hidden('storeId', $product->store_id)}}                  
                                         {{Form::label('quantity', 'Quantity')}}
-                                        {{Form::number('quantity', 1)}}
-                                        {{Form::submit('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart'])}}
+                                        {{Form::number('quantity', 1, ['min' => 1, 'step' => 1])}}
+                                        {{Form::button('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart', 'onclick' => 'window.addToCart(event)'])}}
                                     {!! Form::close() !!}
                                 </div>
                             </div>
@@ -241,8 +241,8 @@
                                         {{Form::hidden('productId', $product->product_id)}}   
                                         {{Form::hidden('storeId', $product->store_id)}}                  
                                         {{Form::label('quantity', 'Quantity')}}
-                                        {{Form::number('quantity', 1)}}
-                                        {{Form::submit('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart'])}}
+                                        {{Form::number('quantity', 1, ['min' => 1, 'step' => 1])}}
+                                        {{Form::button('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart', 'onclick' => 'window.addToCart(event)'])}}
                                     {!! Form::close() !!}
                                 </div>
                             </div>
@@ -305,8 +305,8 @@
                                         {{Form::hidden('productId', $product->product_id)}}   
                                         {{Form::hidden('storeId', $product->store_id)}}                  
                                         {{Form::label('quantity', 'Quantity')}}
-                                        {{Form::number('quantity', 1)}}
-                                        {{Form::submit('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart'])}}
+                                        {{Form::number('quantity', 1, ['min' => 1, 'step' => 1])}}
+                                        {{Form::button('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart', 'onclick' => 'window.addToCart(event)'])}}
                                     {!! Form::close() !!}
                                 </div>
                             </div>

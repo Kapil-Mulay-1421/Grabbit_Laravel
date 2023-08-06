@@ -31,7 +31,7 @@
                         </div>
                         <div class="cart-item-right">
                             {!! Form::open(['action' => ['App\Http\Controllers\CartItemController@destroy', $cartItem->id], "method" => 'PUT', 'id' => 'delete-form']) !!}
-                                {{Form::hidden('_method', 'DELETE')}}
+                                {{Form::hidden('_method', 'GET')}}
                                 <p style="margin: 0px;">{{round($cartItem->current_list_price*$cartItem->quantity, 2)}}</p>{{Form::submit('⛌', ['style' => 'border: none; background: none; margin: 0px; user-select: none; cursor: pointer;', 'id' => 'delete-button', 'data-delete-button-id' => $loop->index])}}
                             {!! Form::close() !!}
                         </div>

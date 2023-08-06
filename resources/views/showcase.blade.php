@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.app', ['search' => $search ?? null])
 
 @section('content')
 
 <div class="container">
         
     <div class="heading" id="heading" style="display: flex;justify-content: center; margin-top: 50px; margin-bottom: 15px; ">
-        <h1>{{$heading}}</h1>
+        <h1>{{ucwords($heading)}}</h1>
     </div>
 
     <div class="content" style="display: flex;justify-content: center;margin-bottom: 50px;">
@@ -31,8 +31,8 @@
                             {{Form::hidden('productId', $product->product_id)}}   
                             {{Form::hidden('storeId', $product->store_id)}}                  
                             {{Form::label('quantity', 'Quantity')}}
-                            {{Form::number('quantity', 1)}}
-                            {{Form::submit('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart'])}}
+                            {{Form::number('quantity', 1, ['min' => 1, 'step' => 1])}}
+                            {{Form::button('Add to Cart', ['style' => 'padding:8px 2.4em', 'name' => 'addToCart', 'onclick' => 'window.addToCart(event)'])}}
                         {!! Form::close() !!}
                     </div>
                 </div>

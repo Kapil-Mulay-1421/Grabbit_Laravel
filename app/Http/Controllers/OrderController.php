@@ -234,6 +234,13 @@ class OrderController extends Controller
                                 ->where('product_id', $orderItem->product_id)
                                 ->where('store_id', $orderItem->store_id)
                                 ->decrement('quantity', $orderItem->quantity);
+
+                        // emptying cart
+                        DB::table('cart_items')
+                                ->where('customer_id', $order->customer_id)
+                                ->where('product_id', $orderItem->product_id)
+                                ->where('store_id', $orderItem->store_id)
+                                ->delete();
                     }
                     // updating order as we just changed the order_status;
                     $order = DB::table('orders')

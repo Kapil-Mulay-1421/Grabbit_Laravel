@@ -244,6 +244,6 @@ class ProductController extends Controller
                 }
         }
 
-        return view('showcase', ['products'=>$products, 'heading' => 'Search Results']);
+        return view('showcase', ['products'=>$products, 'heading' => 'Search Results', 'search' => $search]);
     }
 }

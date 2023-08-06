@@ -133,15 +133,47 @@ class CartItemController extends Controller
                 ->where('store_id', $storeId)
                 ->where('product_id', $productId)
                 ->exists();
-        if ($exists) {
+        if ((floor($quantity)==$quantity) && $quantity >= 1) {
+            $validQuantity = true;
+        } else {
+            $validQuantity = false;
+        }
+
+        if ($exists && $validQuantity) {
             $userId = auth()->user()->id;
             DB::table('cart_items')
                     ->updateOrInsert(
                         ['customer_id'=>$userId, 'store_id'=>$storeId, 'product_id'=>$productId], 
                         ['quantity'=>$quantity]
                     );
+            return back()->with('success', 'Added item to cart.');
+        } else {
+            return back()->with('error', 'Invalid product or Quantity.');
         }
-        return back()->with('success', 'Added item to cart.');
+    }
+
+    public function addAllFromWishlist(Request $request) {
+        $userId = auth()->user()->id;
+        $wishlistItems = DB::table('wishlist_items')
+                ->where('customer_id', $userId)
+                ->get();
+        foreach($wishlistItems as $wishlistItem) {
+            $productId = $wishlistItem->product_id;
+            $storeId = $wishlistItem->store_id;
+            $quantity = 1;
+            DB::table('cart_items')
+                    ->updateOrInsert(
+                        ['customer_id'=>$userId, 'store_id'=>$storeId, 'product_id'=>$productId], 
+                        ['quantity'=>$quantity]
+                    );
+
+            DB::table('wishlist_items')
+                    ->where('customer_id', $userId)
+                    ->where('product_id', $productId)
+                    ->where('store_id', $storeId)
+                    ->delete();
+        }
+        return back()->with('success', 'All items from wishlist transferred to cart.');
     }
 
     public function destroy($id) {
