@@ -94,6 +94,28 @@ header {
     animation: cd-fade-in .3s;
   }
 
+  #FAQ-container {
+    margin-left: 70px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+  .faq {
+    width: 70%;
+    padding: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid gray;
+    opacity: 0;
+    transition: 0.5s;
+    margin-right: 0px;
+}
+
+.faq.scrolled {
+    opacity: 1;
+}
+
 @media screen and (min-width: 1350px) {
 
     .top-bar {

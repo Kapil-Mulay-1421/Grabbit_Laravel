@@ -156,3 +156,7 @@ Route::post('/delivery-agent/track', function() {
     return redirect('/home');
 });
 
+Route::get('/about-us', function() {
+    return view('about');
+});
+

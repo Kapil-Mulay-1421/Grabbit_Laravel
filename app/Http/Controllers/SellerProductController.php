@@ -270,15 +270,6 @@ class SellerProductController extends Controller
             return redirect('/home')->with('error', 'Product does not exist.');
         }
 
-        $request->validate([
-            'name' => 'required|max:45', 
-            'description' => 'required|max:1023', 
-            'category' => 'required', 
-            'quantity' => 'required|integer|min:0', 
-            'list_price' => 'required|numeric|min:0', 
-            'image' => 'image|max:1024', 
-        ]);
-
         // checking if user has rights to change product info
         $hasRights = DB::table('products')
                 ->where('product_id', $productId)
@@ -288,6 +279,11 @@ class SellerProductController extends Controller
 
         if (!$hasRights) {
             // user can only change the quantity and price of the product sold in his store.
+            $request->validate([
+                'quantity' => 'required|integer|min:0', 
+                'list_price' => 'required|numeric|min:0', 
+            ]);
+
             $isSelling = DB::table('shopwise_products')
                     ->where('store_id', $store->store_id)
                     ->where('product_id', $productId)
@@ -314,6 +310,15 @@ class SellerProductController extends Controller
         }
 
         // if hasRights, the user can change everything about the product.
+        $request->validate([
+            'name' => 'required|max:45', 
+            'description' => 'required|max:1023', 
+            'category' => 'required', 
+            'quantity' => 'required|integer|min:0', 
+            'list_price' => 'required|numeric|min:0', 
+            'image' => 'image|max:1024', 
+        ]);
+
         $category_name = $request->input('category');
         $category_id = DB::table('categories')
                 ->where('category_name' , '=' , $category_name)

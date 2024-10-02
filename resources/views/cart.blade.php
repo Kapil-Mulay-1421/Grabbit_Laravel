@@ -11,7 +11,7 @@
         <div class="my-cart-wrapper">
             <h2>My Cart</h2>
             <hr>
-            <div class="cart-items-wrapper" id="cartItemsWrapper">
+            <div class="cart-items-wrapper" id="nonSlidingCartItemsWrapper">
                 @foreach($cartItems as $cartItem)
                 <div class="cart-item-wrapper">
                     <div class="cart-product" style="display: flex; justify-content: space-between;">
@@ -20,10 +20,8 @@
                             <div class="product-information" style="margin-left: 20px;">
                                 <p style="margin-top:0; margin-bottom:0; margin-right: 30px; font-weight: bold;">{{$cartItem->product_name}}</p> <br>
                                 <div class="dropdown-wrapper">
-                                    <div class="store-holder" style="display: none;"><p style="cursor: pointer; user-select: none; margin-top: 0; font-weight: bold; font-size: 14px">demo store</p></div>
-                                    <div class="dropdown-content-cart">
-                                        // stores rendered through another function here
-                                    </div>
+                                    
+
                                 </div><br>
                                 <p style="margin:0px;">{{$cartItem->current_list_price}}</p> <br>
                                 <input type="number" onchange="updateItemTotal(event)" name="quantity" value={{$cartItem->quantity}} style="width: 48%; height: 20px;" data-internal-id={{$loop->index}}> <br>

@@ -41,6 +41,7 @@ storeXhr.onreadystatechange = function() {
             return;
         }
         Array.from(dropdownContentDivs).forEach((dropdownContentDiv, index) => {
+            console.log(dropdownContentDiv)
             prepareStores(storeNamesLists, index)
         });
         storeNamesLists.forEach((storeList, index) => {
@@ -54,7 +55,7 @@ storeXhr.onreadystatechange = function() {
 storeXhr.open("GET", "/stores/sellers", true);
 storeXhr.send();
 
-const cartItemsWrapper = document.getElementById('cartItemsWrapper');
+const cartItemsWrapper = document.getElementById('nonSlidingCartItemsWrapper');
 cartItemsWrapper.innerHTML = "";
 function showCartItems() {
     cartItems.forEach((cartItem, index) => {
@@ -139,9 +140,10 @@ window.updateItemTotal = function(e) {
 const dropdownContentDivs = document.getElementsByClassName('dropdown-content-cart');
 
 function prepareStores(storeNamesLists, index) {
-    console.log(storeNamesLists);
     let passedStoreIds = []
     dropdownContentDivs[index].innerHTML = '';
+    console.log(storeNamesLists)
+    console.log(index)
     storeNamesLists[index].forEach(storeArray => {
         if (storeArray[1] >= cartItems[index]['quantity']) {
         // 0th element of storeArray is store name. 1st is available quantity.
@@ -229,8 +231,9 @@ window.showStores = function() {
     if (! showingStores) {
         const storeHolders = document.getElementsByClassName("store-holder")
         Array.from(storeHolders).forEach((storeHolder, index) => {
+
             let storeIndex = storeIdsLists[index].indexOf(cartItems[index]['store_id']*1);
-            console.log(storeHolder.children)
+            // console.log(storeHolder.children)
             storeHolder.children[0].innerHTML = storeNamesLists[index][storeIndex][0];
             storeHolder.style.display = 'block';
             showingStores = true;
