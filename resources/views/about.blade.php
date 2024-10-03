@@ -57,6 +57,7 @@
         <hr>
     </div>
 
+    <h1 style="width: 80%; margin-left: 10%;">Meet the Team</h1>
     <div id="about-grid">
         <div id='about-wrapper' >
             <img src="{{asset("images/kapil.jpg")}}" alt="" style="height: 250px; width: 250px; overflow: hidden;">
