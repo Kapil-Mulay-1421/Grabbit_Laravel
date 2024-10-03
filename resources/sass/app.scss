@@ -94,8 +94,36 @@ header {
     animation: cd-fade-in .3s;
   }
 
+  .about-container {
+    margin-left: 10%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  #about-grid img{
+    margin-bottom: 20px;
+    border-radius: 50%;
+  }
+
+  #about-wrapper {
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
   #FAQ-container {
-    margin-left: 70px;
+    margin-left: 10%;
     padding: 20px;
     position: relative;
     overflow: hidden;
@@ -107,14 +135,17 @@ header {
     margin-top: 20px;
     margin-bottom: 20px;
     border: 1px solid gray;
-    opacity: 0;
+    opacity: 1;
     transition: 0.5s;
     margin-right: 0px;
 }
 
+/*
+figure out how to make this work:
 .faq.scrolled {
     opacity: 1;
 }
+    */
 
 @media screen and (min-width: 1350px) {
 
@@ -202,7 +233,7 @@ header {
     }
     
     .grabbit-bar-right > .icon-wrapper {
-        width: 150px;
+        width: 175px;
         display: flex;
         justify-content: space-between;
         padding-right: 45px;

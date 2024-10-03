@@ -304,7 +304,8 @@ class CartItemController extends Controller
                     // Razorpay is currently unavailable as they need specific payment details in place.
                     // Use the below code once we have the access to the API keys.
 
-                    /*
+                    // Log 2024: Using razorpay as a mock payment method
+                    // Using test API keys only
                     $address = getActiveAddress($userId);
                     if ($address == null) {
                         return redirect('/profile/addresses')->with('error', 'Please activate an address before checkout.');
@@ -323,10 +324,15 @@ class CartItemController extends Controller
 
                     return view('checkout', ['total' => ceil($total*100), 'razorpay_order_id' => $razorpayOrder->id]);
                     break;
-                    */
-                    return redirect('/cart')->with('error', 'Please choose a valid payment method.');
+                    
+                    // return redirect('/cart')->with('error', 'Please choose a valid payment method.');
 
                 case 'stripe': 
+                    // Log 2024: Stripe started working with Indian busineses that are not targetting international expansion. 
+                    // As a result, mock payments don't work either. 
+                    // Uncomment the following code once stripe becomes more open to normal businesses, 
+                    // which is expected to happen sometime in the latter half of 2025.
+                    /*
                     // adding cart items to session: 
                     session(['cartItems' => $cartItems]);
                     session(['subtotal' => $subtotal, 'total' => $total, 'note' => $note]);                    
@@ -392,8 +398,10 @@ class CartItemController extends Controller
                         ->where('order_id', $orderId)
                         ->update(['stripe_session_id' => $checkout_session->id]);
                       
-                    return redirect($checkout_session->url);
+                    return redirect($checkout_session->url);*/
+                    return redirect('/cart')->with('error', 'Please choose a valid payment method.');
             }
+            
 
         }
     }

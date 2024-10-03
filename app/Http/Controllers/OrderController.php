@@ -105,6 +105,15 @@ class OrderController extends Controller
                             ->join('products', 'products.product_id', 'order_items.product_id')
                             ->where('order_id', $order->order_id)
                             ->get();
+            foreach($orderItems as $orderItem){
+                                
+                // emptying cart
+                DB::table('cart_items')
+                    ->where('customer_id', $order->customer_id)
+                    ->where('product_id', $orderItem->product_id)
+                    ->where('store_id', $orderItem->store_id)
+                    ->delete();
+            }
 
             // Send email to customer, etc.
             $customerDetails = DB::table('customers')

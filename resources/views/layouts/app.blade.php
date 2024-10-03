@@ -36,7 +36,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a href="" class="nav-link">About Us</a> 
+                            <a href="about-us" class="nav-link">About Us</a> 
                         </li>
                         <li class="nav-item">
                             <a href="/customerSupport" class="nav-link">Customer Support</a>
@@ -113,7 +113,7 @@
                     <a href="/profile/wishlist">Wishlist</a>
                     <a href="/cart">Your Cart</a>
                     <a href="/customerSupport">Customer Support</a>
-                    <a href="about.html">About Us</a>
+                    <a href="about-us">About Us</a>
                 </div>
             </div>
 

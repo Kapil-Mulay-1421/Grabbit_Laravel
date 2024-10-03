@@ -177,7 +177,7 @@ class ProductController extends Controller
                     }
 
                 addToCart($request);
-                return back()->with('success', 'Added item to cart.');
+                return redirect('/cart')->with('success', 'Added item to cart.');
 
 
         } else {
