@@ -2,7 +2,7 @@
 @section('content')
 
 <head>
-    @vite(['resources/js/createProduct.js'])
+    {{-- @vite(['resources/js/createProduct.js']) --}}
 </head>
 
 <div class="product-page-container">
