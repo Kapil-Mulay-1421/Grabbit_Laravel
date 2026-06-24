@@ -9,7 +9,7 @@
 <body>
     <div class="outer-container">
         <div class="content">
-            <div class="bread-area" style="background-image: url(images/home_page_bread.jpg);">
+            {{-- <div class="bread-area" style="background-image: url(images/home_page_bread.jpg);">
                 <div class="bread-area-text-container">
                     <div class="bread-area-small-text">
                         <h3>Easy, Fresh & Convenient</h3>
@@ -65,7 +65,7 @@
                         <p>Verified by us</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- <div class="showcase-strip">
                 <h1>Best Deals</h1>
