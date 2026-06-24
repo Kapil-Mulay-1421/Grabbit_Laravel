@@ -295,9 +295,9 @@
                 <h2 style="margin-block-start: 0; margin-block-end: 1.2em;">We Accept the Following Payment Methods</h2>
     
                 <div class="payment-methods-images-wrapper" style="display: flex; justify-content: space-between">
-                    <img src={{asset("Images/visa-payment.png")}} alt="">
+                    <img src={{asset("images/visa-payment.png")}} alt="">
                     <img src={{asset("images/mastercard-icon.jpg")}} alt="">
-                    <img src={{asset("Images/google-pay.jpg")}} alt="">
+                    <img src={{asset("images/google-pay.jpg")}} alt="">
                     <img src={{asset("images/apple-pay.png")}} alt="">
                 </div>
             </div>
