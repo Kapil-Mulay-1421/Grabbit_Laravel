@@ -53,6 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:25', 'unique:customers,phone'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -72,8 +73,14 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $idInserted = DB::table('customers')
-                ->insert(['customer_id' => $user->id, 'first_name' => $data['name'], 'last_name' => $data['last_name'], 'email' => $data['email'], 'subscribed' => 0]);
+        DB::table('customers')->insert([
+            'customer_id' => $user->id,
+            'first_name' => $data['name'],
+            'last_name' => $data['last_name'],
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+            'subscribed' => 0,
+        ]);
 
         return $user;
     }

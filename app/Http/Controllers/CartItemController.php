@@ -313,7 +313,7 @@ class CartItemController extends Controller
 
                     session(['address' => $address]);
 
-                    $keyId = "rzp_test_s5yDUHGWsYmtrg";
+                    $keyId = env("RAZORPAY_KEY_ID");
                     $secret = env("RAZORPAY_SECRET_TEST_KEY");
                     $api = new Api($keyId, $secret);
         

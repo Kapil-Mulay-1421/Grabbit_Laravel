@@ -14,7 +14,7 @@ function getMeta(metaName) {
   }
 
 var options = {
-    "key": "rzp_test_s5yDUHGWsYmtrg", // Enter the Key ID generated from the Dashboard
+    "key": "rzp_test_T5TCPcrWvNkJJV", // Enter the Key ID generated from the Dashboard
     "amount": getMeta('total'), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     "currency": "INR",
     "name": "Grabbit India",
