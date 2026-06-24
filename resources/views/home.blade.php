@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="showcase-strip">
+            {{-- <div class="showcase-strip">
                 <h1>Best Deals</h1>
                 <div class="panel-wrapper">
                     <div class="items-wrapper">
@@ -102,7 +102,7 @@
                         Shop Best Deals
                     </button>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- <div class="advertisement-strip">
                 <div class="advertisement-leftt" style="background-image: url(images/home_page_wine.jpg);">
