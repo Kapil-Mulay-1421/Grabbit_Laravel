@@ -9,7 +9,7 @@
 <body>
     <div class="outer-container">
         <div class="content">
-            {{-- <div class="bread-area" style="background-image: url(images/home_page_bread.jpg);">
+            <div class="bread-area" style="background-image: url(images/home_page_bread.jpg);">
                 <div class="bread-area-text-container">
                     <div class="bread-area-small-text">
                         <h3>Easy, Fresh & Convenient</h3>
@@ -65,9 +65,9 @@
                         <p>Verified by us</p>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
-            {{-- <div class="showcase-strip">
+            <div class="showcase-strip">
                 <h1>Best Deals</h1>
                 <div class="panel-wrapper">
                     <div class="items-wrapper">
@@ -102,9 +102,9 @@
                         Shop Best Deals
                     </button>
                 </div>
-            </div> --}}
+            </div>
 
-            {{-- <div class="advertisement-strip">
+            <div class="advertisement-strip">
                 <div class="advertisement-leftt" style="background-image: url(images/home_page_wine.jpg);">
                     <div class="add-text-box">
                         <h3>It's Wine O'Clock!</h3>
@@ -347,7 +347,7 @@
                         <p id="afterSubmit" style="display: none;">Thanks for submitting!</p>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
         </div>
     </div>
