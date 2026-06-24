@@ -2,7 +2,7 @@
 @section('content')
 
 <head>
-    @vite(['resources/js/cart.js'])
+    {{-- @vite(['resources/js/cart.js']) --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
