@@ -232,7 +232,7 @@
                     <li><h1>Grabbit</h1></li>
                     <li><h2>Need Help?</h2></li>
                     <li><p>​Visit our Customer Support <br> for assistance or call us at</p></li>
-                    <li><h2>+91 86240 37649</h2></li>
+                    <li><h2>+91 95527 30673</h2></li>
                     <li>
                         <div class="social-bar">
                             <a href="https://www.facebook.com/profile.php?id=100084852880139"><img src={{asset("images/Icons/facebook_icon.png")}} alt=""></a>

@@ -658,15 +658,15 @@ figure out how to make this work:
     
     .category-wrapper img {
         position: relative;
-        bottom: -350px;
+        bottom: 0;
         margin-top: 30%;
         margin-bottom: 20%;
         transition: bottom 1.25s ease-out;
     }
 
-    .category-wrapper img.scrolled {
-        bottom: 0;
-    }
+    // .category-wrapper img.scrolled {
+    //     bottom: 0;
+    // }
     
     .category-wrapper a {
         color: black;
