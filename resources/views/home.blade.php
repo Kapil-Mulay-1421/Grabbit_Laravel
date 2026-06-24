@@ -2,9 +2,9 @@
 
 @section('content')
 
-<head>
+{{-- <head>
     @vite(['resources/js/home.js'])
-</head>
+</head> --}}
 
 <body>
     <div class="outer-container">
