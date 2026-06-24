@@ -104,7 +104,7 @@
                 </div>
             </div>
 
-            <div class="advertisement-strip">
+            {{-- <div class="advertisement-strip">
                 <div class="advertisement-leftt" style="background-image: url(images/home_page_wine.jpg);">
                     <div class="add-text-box">
                         <h3>It's Wine O'Clock!</h3>
@@ -347,7 +347,7 @@
                         <p id="afterSubmit" style="display: none;">Thanks for submitting!</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>
