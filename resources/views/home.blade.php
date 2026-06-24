@@ -6,7 +6,7 @@
     @vite(['resources/js/home.js'])
 </head> --}}
 
-<body>
+{{-- <body> --}}
     <div class="outer-container">
         <div class="content">
             <div class="bread-area" style="background-image: url(images/home_page_bread.jpg);">
@@ -351,6 +351,6 @@
 
         </div>
     </div>
-
-</body>
+    @vite(['resources/js/home.js'])
+{{-- </body> --}}
 @endsection
