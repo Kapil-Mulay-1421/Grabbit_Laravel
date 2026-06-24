@@ -4,7 +4,7 @@
 <head>
     <meta name="razorpay_order_id" content="{{$razorpay_order_id}}">
     <meta name="total" content="{{$total}}">
-    @vite(['resources/js/pay.js'])
+    {{-- @vite(['resources/js/pay.js']) --}}
 </head>
 <div style="display:flex; justify-content: center; margin: 50px;">
     <button id="rzp-button1" class="shop-now-light">Pay With Razorpay</button>
