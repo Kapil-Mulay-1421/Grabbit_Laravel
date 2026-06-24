@@ -75,7 +75,7 @@
                             <div class="item-wrapper" style="position: relative;">
                                 @if($product->localproduce)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
                                 <a href="/products/{{$product->product_name}}">
-                                    <img src= {{$product->product_image}}  alt="">
+                                    <img src= {{asset($product->product_image)}}  alt="">
                                 </a>
                                 <div class="item-mid">
                                     <a href="/products/{{$product->product_name}}">
@@ -178,7 +178,7 @@
                             <div class="item-wrapper" style="position: relative;">
                                 @if($product->localproduce == 1)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
                                 <a href="/products/{{$product->product_name}}">
-                                    <img src= {{$product->product_image}}  alt="">
+                                    <img src= {{asset($product->product_image)}}  alt="">
                                 </a>
                                 <div class="item-mid">
                                     <a href="/products/{{$product->product_name}}">
@@ -227,7 +227,7 @@
                             <div class="item-wrapper" style="position: relative;">
                                 @if($product->localproduce == 1)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
                                 <a href="/products/{{$product->product_name}}">
-                                    <img src= {{$product->product_image}}  alt="">
+                                    <img src= {{asset($product->product_image)}}  alt="">
                                 </a>
                                 <div class="item-mid">
                                     <a href="/products/{{$product->product_name}}">
@@ -291,7 +291,7 @@
                             <div class="item-wrapper" style="position: relative;">
                                 @if($product->localproduce == 1)  <p style="position: absolute; background-color: #2B80A1; margin: 0; padding: 8px; color: white; font-size: 13px">Local Produce</p> @endif
                                 <a href="/products/{{$product->product_name}}">
-                                    <img src= {{$product->product_image}}  alt="">
+                                    <img src= {{asset($product->product_image)}}  alt="">
                                 </a>
                                 <div class="item-mid">
                                     <a href="/products/{{$product->product_name}}">
