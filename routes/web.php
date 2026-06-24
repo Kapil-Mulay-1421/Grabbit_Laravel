@@ -17,9 +17,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/home');
-});
+// Route::get('/', function () {
+//     return redirect('/home');
+// });
 
 Auth::routes();
 

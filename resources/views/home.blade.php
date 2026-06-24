@@ -9,7 +9,7 @@
 <body>
     <div class="outer-container">
         <div class="content">
-            <div class="bread-area">
+            <div class="bread-area" style="background-image: url(images/home_page_bread.jpg);">
                 <div class="bread-area-text-container">
                     <div class="bread-area-small-text">
                         <h3>Easy, Fresh & Convenient</h3>
