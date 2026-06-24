@@ -351,6 +351,6 @@
 
         </div>
     </div>
-    @vite(['resources/js/home.js'])
+    {{-- @vite(['resources/js/home.js']) --}}
 {{-- </body> --}}
 @endsection
