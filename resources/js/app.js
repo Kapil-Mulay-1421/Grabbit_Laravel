@@ -182,14 +182,12 @@ window.addToCart = function(e) {
 
     const httprequest = new XMLHttpRequest();
     httprequest.onreadystatechange = function() {
-        if (this.readyState == 4) {
-            if (this.responseURL && new URL(this.responseURL).pathname === '/login') {
-                window.location.href = "/login";
-            } else if (this.status == 200) {
-                triggerCart();
-            }
+        if (this.readyState == 4 && this.status == 200) {
+            triggerCart()
+        } else if (this.readyState == 4 && this.status == 401) {
+             window.location.href = "/login"
         }
-    };
-    httprequest.open("POST", "/cart", false);
+    }
+    httprequest.open("POST", "/cart", false)
     httprequest.send(params);
 }
