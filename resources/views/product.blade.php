@@ -19,7 +19,7 @@
                     {{Form::number('quantity', 1, ['min' => 1, 'step' => 1])}} <br><br><br>
                     <div class="cart-button-wrapper" style="display:flex; align-items:center;">
                         {{Form::submit('Add to Cart', ['style' => 'padding:8px 2.4em', 'class' => "add-to-cart-lighter", 'name' => 'addToCart'])}}
-                        {{Form::image(url($inWishlist ? asset("images/icons/heart_circle_full.png") : asset("images/icons/heart_circle.png")), 'submit', ['style'=>"width:48px; margin-left: 20px; cursor: pointer;"])}}
+                        {{Form::image(url($inWishlist ? asset("images/Icons/heart_circle_full.png") : asset("images/Icons/heart_circle.png")), 'submit', ['style'=>"width:48px; margin-left: 20px; cursor: pointer;"])}}
                     </div>
                 {!! Form::close() !!}
                 <h2 style="margin-top: 45px;">Product Info</h2>
