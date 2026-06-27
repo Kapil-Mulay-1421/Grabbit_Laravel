@@ -253,6 +253,10 @@ window.showNote = function() {
 }
 
 window.checkout = function() {
+    if(cartItems.length===0){
+        window.alert("Please add items to cart before checkout.");
+        return;
+    }
     if (errors.length != 0) {
         for (let i = 0; i < errors.length; i++) {
             alert(cartItems[errors[i][0]]['product_name'] + ": " + errors[i][1])
