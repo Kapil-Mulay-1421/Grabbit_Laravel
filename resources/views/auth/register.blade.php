@@ -8,6 +8,9 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
+                    <div class="row m-3">
+                        <strong><span style="text-decoration: underline;">Demo Note:</span> This is a fully functional application. Please use a valid email address. You'll receive a verification email to activate your account. The phone number need NOT be valid.</strong>
+                    </div>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 

@@ -185,6 +185,8 @@ window.addToCart = function(e) {
         if (this.readyState == 4) {
             if (this.responseURL && new URL(this.responseURL).pathname === '/login') {
                 window.location.href = "/login";
+            } else if(this.responseURL && new URL(this.responseURL).pathname === '/email/verify'){
+                window.location.href = "/email/verify";
             } else if (this.status == 200) {
                 triggerCart();
             }
