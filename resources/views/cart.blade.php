@@ -46,9 +46,9 @@
                 <li><div class="subtotal" style="display: flex; justify-content: space-between;"><p>Subtotal</p><p id="subtotal-element">{{$subtotal}}</p></div></li>
                 <li><div class="coupon" style="justify-content: space-between; display:flex;"><p>Coupon</p><p id="coupon">{{$appliedCoupon ? '20% Off' : 'None'}}</p></div></li>
                 <li><div class="shipping" style="display: flex; justify-content: space-between;"><p>Shipping</p><p>{{$shipping}}.00</p></div></li>
+                <div style="display:flex; justify-content:flex-end; padding: 5px;">
                 @if($addressFound)
                 <li><b>Shipping Address:</b> <br>{{$address->address}}, {{$address->city}}, {{$address->state}}, {{$address->country}}</li>
-                <div style="display:flex; justify-content:flex-end; padding: 5px;">
                     <button class="light-square-button" style="padding: 5px;" onclick="window.location.href='/profile/addresses'">Change Address</button>
                     @endif
                     @if(! $addressFound)
