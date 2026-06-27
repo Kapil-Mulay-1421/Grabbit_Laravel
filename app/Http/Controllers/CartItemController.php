@@ -318,6 +318,23 @@ class CartItemController extends Controller
                     $api = new Api($keyId, $secret);
         
                     $razorpayOrder = $api->order->create(array('amount' => ceil($total*100), 'currency' => 'INR'));
+                    $activeAddress = $address->address. ", ".$address->city. ", ".$address->state.", ".$address->country;
+                    $date = date('Y-m-d');
+
+                    $orderId = DB::table('orders')
+                        ->insertGetId([
+                            'razorpay_order_id' => $razorpayOrder->id,
+                            'customer_id' => $userId,
+                            'subtotal' => $subtotal,
+                            'total_amount' => ceil($total),
+                            'order_date' => $date,
+                            'order_status' => 0, // pending
+                            'billing_address' => $activeAddress,
+                            'shipping_address' => $activeAddress,
+                            'payment_method' => 'razorpay',
+                            'note' => $note,
+                            'shipping' => $shipping
+                        ]);
                     session(['razorpayOrder' => $razorpayOrder]);
                     session(['cartItems' => $cartItems]);
                     session(['subtotal' => $subtotal, 'total' => $total, 'note' => $note]);

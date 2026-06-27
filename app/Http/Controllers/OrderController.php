@@ -29,7 +29,12 @@ class OrderController extends Controller
 
         $error = "Payment Failed";
 
-        $razorpayOrder = session('razorpayOrder');
+        $razorpayOrderId = $request->input('razorpay_order_id');
+
+        $pendingOrder = DB::table('orders')
+            ->where('razorpay_order_id', $razorpayOrderId)
+            ->where('customer_id', auth()->user()->id)
+            ->first();
 
         if (empty($_POST['razorpay_payment_id']) === false)
         {
@@ -43,7 +48,7 @@ class OrderController extends Controller
                 // come from a trusted source (session here, but
                 // could be database or something else)
                 $attributes = array(
-                    'razorpay_order_id' => $razorpayOrder->id,
+                    'razorpay_order_id' => $pendingOrder->razorpay_order_id, 
                     'razorpay_payment_id' => $request->input('razorpay_payment_id'),
                     'razorpay_signature' => $request->input('razorpay_signature')
                 );
@@ -60,17 +65,16 @@ class OrderController extends Controller
         if ($success === true)
         {
             $userId = auth()->user()->id;
-            $totalAmount = $razorpayOrder->amount;
+            $totalAmount = $pendingOrder->total_amount*100;
             $totalAmount = $totalAmount/100;
-            $subtotal = session('subtotal');
+            $subtotal = $pendingOrder->subtotal;
             $referenceId = $request->input('razorpay_payment_id'); // since we know that the payment source is authentic.
-            $note = session('note');
+            $note = $pendingOrder->note;
             $date = date('Y-m-d');
             $status = 1;
             $shipping = 33;
 
-            $address = session('address');
-            $activeAddress = $address->address. ", ".$address->city. ", ".$address->state.", ".$address->country;
+            $activeAddress = $pendingOrder->billing_address;
 
             $orderAlreadyAdded = DB::table('orders')
                     ->where('reference_id', $referenceId)
@@ -81,14 +85,27 @@ class OrderController extends Controller
                 exit();
             }
 
-            $orderId = DB::table('orders')
-                        ->insertGetId(['reference_id' => $referenceId, 'customer_id' => $userId, 'subtotal' => $subtotal, 'total_amount' => $totalAmount, 'order_date' => $date, 'order_status' => $status, 'billing_address' => $activeAddress, 'shipping_address' => $activeAddress, 'payment_method' => 'razorpay', 'note' => $note, 'shipping' => $shipping]);
+            DB::table('orders')
+                ->where('order_id', $pendingOrder->order_id)
+                ->update([
+                    'reference_id' => $referenceId,
+                    'order_status' => 1,
+                ]);
 
-            $cartItems = session('cartItems');
+            $cartItems = DB::table('cart_items')
+                ->where('customer_id', $userId)
+                ->get();
+
+            foreach($cartItems as $cartItem) {
+                $cartItem->current_list_price = DB::table('shopwise_products')
+                    ->where('store_id', $cartItem->store_id)
+                    ->where('product_id', $cartItem->product_id)
+                    ->value('list_price');
+            }
 
             foreach($cartItems as $cartItem) {
                 DB::table('order_items')
-                        ->insert(['order_id' => $orderId, 'product_id' => $cartItem->product_id, 'store_id' => $cartItem->store_id, 'quantity' => $cartItem->quantity, 'buy_price' =>$cartItem->current_list_price, 'discount' => '0' ]);
+                        ->insert(['order_id' => $pendingOrder->order_id, 'product_id' => $cartItem->product_id, 'store_id' => $cartItem->store_id, 'quantity' => $cartItem->quantity, 'buy_price' =>$cartItem->current_list_price, 'discount' => '0' ]);
                 
                 DB::table('shopwise_products')
                         ->where('product_id', $cartItem->product_id)
@@ -97,7 +114,7 @@ class OrderController extends Controller
             }
 
             $order = DB::table('orders')
-                    ->where('order_id', $orderId)
+                    ->where('order_id', $pendingOrder->order_id)
                     ->first();
 
             $orderItems = DB::table('order_items')
