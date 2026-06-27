@@ -25,7 +25,7 @@ class QueryController extends Controller
                 ->first();
 
         // sending mail to admin
-        Mail::to('grabbit123go@gmail.com')->send(new CustomerQuery($query));
+        Mail::to('grabbitindia.mail@gmail.com')->send(new CustomerQuery($query));
 
         return back()->with('success', 'Your query has been registered. We will get back to you as soon as possible. Thank you for you patience.');
     }

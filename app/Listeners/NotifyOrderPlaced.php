@@ -40,7 +40,7 @@ class NotifyOrderPlaced
         }
         Log::info($event->order->order_status);
         try {
-            Mail::to('grabbit123go@gmail.com')->send(new OrderPlacedAdmin($event->order, $event->orderItems, $event->paymentMethod));
+            Mail::to('grabbitindia.mail@gmail.com')->send(new OrderPlacedAdmin($event->order, $event->orderItems, $event->paymentMethod));
         } catch(\Exception $e) {
             Log::error($e);
         }
