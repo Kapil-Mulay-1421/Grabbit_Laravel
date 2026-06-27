@@ -64,6 +64,16 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="row mb-0 mt-2">
+                            <div class="col-md-8 offset-md-4">
+                                <p class="text-sm text-gray-600">
+                                    Don't have an account? 
+                                    <a href="{{ route('register') }}" class="text-indigo-600 hover:underline">
+                                        Register
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
