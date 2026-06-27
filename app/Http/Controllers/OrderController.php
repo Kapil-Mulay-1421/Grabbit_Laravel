@@ -33,8 +33,8 @@ class OrderController extends Controller
 
         if (empty($_POST['razorpay_payment_id']) === false)
         {
-            $keyId = "rzp_test_s5yDUHGWsYmtrg";
-            $secret = "1E5E2FuGI6dQ7iJc4u4hsjNM";
+            $keyId = env("RAZORPAY_KEY_ID");
+            $secret = env("RAZORPAY_SECRET_TEST_KEY");
             $api = new Api($keyId, $secret);
 
             try
